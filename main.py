@@ -13,6 +13,8 @@ import func_bancarias as fb
 menu = """
 Escolhe uma opção para prosseguir:
 
+
+
 D = "Deposito"
 S = "Saque"
 E = "Extrato"
