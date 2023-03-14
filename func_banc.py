@@ -1,33 +1,12 @@
 # Nesse arquivo ficará todas as funções bancárias e configurações do banco
 from datetime import datetime
+import openpyxl
+import pandas as pd
+from pathlib import Path
 
+ARQUIVO_CONTAS = Path() / "dados" / "clientes.xlsx"
 
-def criar_usuario():
-    CPF = str(input("Digita o seu número de CPF:\n "))
-    nome = str(input("Digita o seu nome completo:\n "))
-    data_nascimento = str(input("Digita a sua data de Nascimento:\n "))
-    endereçoRua = str(input("Vamos cadastrar o seu endereço:\nDigita o nome da sua rua/av:\n"))
-    endereçoNumero = str(input("Digita o nome número do seu endereço:\n"))
-    endereçoBairro = str(input("Digita o bairro :\n"))
-    endereçoCidade = str(input("Digita o nome da cidade/Estado:\n"))
-    
-
-    usuario = [CPF, nome, data_nascimento, [f"Endereço: {endereçoRua}, {endereçoNumero} - bairro: {endereçoBairro} - {endereçoCidade}"]]
-
-    return usuario
-    
-
-class usuario:
-    def __init__(self, CPF, nome: str, data_nascimento: str, endereço: str):
-        self.CPF = CPF
-        self.nome = nome
-        self.data_nascimento = data_nascimento
-        self.endereço = endereço
-    
-    
-    def criar_conta(self):
-        
-        pass
+print(ARQUIVO_CONTAS)
 
 class banco:
     
@@ -40,12 +19,9 @@ class banco:
         self.historico_saque = historico_saque
         self.LIMITE = {"Valor_Saque": 500, "Qtd_Saque": 3}
         
-        
-        
     def __str__(self):
         
         return "Este é um banco feito "
-        
         
 
     def deposito(self):
@@ -99,4 +75,9 @@ class banco:
         agora = datetime.now().strftime('%d/%m/%Y %H:%M')
         print(f"Data: {agora}")
         print("*****************************************")
+        
+
+
+
+
         

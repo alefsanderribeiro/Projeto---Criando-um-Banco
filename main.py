@@ -8,24 +8,37 @@
 
 # Extrato: Deve listar todos os depósitos e saques realizados na conta. Mostrar o saldo final em "R$ XXX.XX".
 
-import func_bancarias as fb
+import func_banc as fb
+import func_user as fu
 
-menu = """
+
+menu_principal = """
 Escolhe uma opção para prosseguir:
 
 
-
+U = "Usuário"
 D = "Deposito"
 S = "Saque"
 E = "Extrato"
 Q = "Sair"
+
+"""
+
+menu_usuario = """
+Escolhe uma opção para prosseguir:
+
+
+C = "Cadastro de novo usuário"
+A = "Ativar Usuário"
+D = "Desativar Usuário"
+Q = "Sair"
+
 """
 
 # Endereço: Logradouro, número - bairro - cidade/Sigla Estado.
 # O CPF deve ter somente um número cadastrado, do tipo String.
-dict_usuarios = {}
 
-print(dict_usuarios)
+
 # conta da agencia não pode ter o mesmo número. O número é sequenciado, começando com o número 1.
 # agencia é fixa: "0001"
 # uma conta não existe sem estar vinculado ao usuário
@@ -38,24 +51,71 @@ qtd_saque_efetuado = 0
 historico_deposito = ""
 historico_saque = ""
 
-user = fb.criar_usuario()
-cpf = user[0]
-dict_usuarios.update({cpf: user[1:5]})
-nome = dict_usuarios[cpf][0] # como procurar o nome do cliente
-data_nascimento = dict_usuarios[cpf][1] #como procurar a data do nascimento do cliente
-endereco = dict_usuarios[cpf][2][0] #como procurar um endereço
 
-    
+# dados = ["01912841223", "Alefsander Ribeiro", "23/10/1994", "R. Escorpião, n° 11700 - Bairro: Ulisses Guimarães - Porto Velho/RO."]
+# dados1 = ["0191284122f1233", "Alefsander Ribeiro", "23/10/1994", "R. Escorpião, n° 11700 - Bairro: Ulisses Guimarães - Porto Velho/RO."]
+# dados2 = ["04240084245", "Geissilaine Verônica", "19/107/1998", "R. Maué, n° 4445 - Bairro: Socialista - Porto Velho/RO."]
+# dados3 = ["123461365123", "Alefsander Ribeiro", "23/10/1994", "R. Escorpião, n° 11700 - Bairro: Ulisses Guimarães - Porto Velho/RO."]
+# dados4 = ["123461365", "Alefsander Ribeiro", "23/10/1994", "R. Escorpião, n° 11700 - Bairro: Ulisses Guimarães - Porto Velho/RO."]
 
-    
+#dados = fb.usuario(dados[0], dados[1], dados[2], dados[3])
 
 
-""" banco = fb.banco(agencia, conta, saldo ,qtd_saque_efetuado, historico_deposito, historico_saque)
+#print(dados.verficar_cadastro())
+#usuario.ativar_usuario("01912841223")
+
+
+banco = fb.banco(agencia, conta, saldo ,qtd_saque_efetuado, historico_deposito, historico_saque)
 
 while True:
-    opcao = str(input(menu)).upper()
+    opcao = str(input(menu_principal)).upper()
     
-    if opcao == "D":
+    if opcao == "U":
+        while True:
+            
+            while True:
+                opcao_user = str(input(menu_usuario)).upper()
+                
+                # Caso a resposta for "C", será feiro o cadastro do usuário.
+                if opcao_user == "C":
+                    CPF = fu.usuario(str(input(("Digita o número de CPF:\n "))))
+                    user = fu.usuario.verficar_cadastro(CPF)
+                    if user:
+                        print("Usuário já cadastrado")
+                    
+                    else:
+                        CPF.adicionar_usuario()
+                # Caso a resposta for "A", será feiro a Ativação do usuário.
+                elif opcao_user == "A":
+                    CPF = fu.usuario(str(input(("Digita o número de CPF:\n "))))
+                    user = fu.usuario.verficar_cadastro(CPF)
+                    
+                    if user:
+                        CPF.ativar_usuario()
+                    else:
+                        print("Usuário não cadastrado!")
+                        
+                # Caso a resposta for "D", será feiro a desativação do usuário
+                elif opcao_user == "D":
+                    CPF = fu.usuario(str(input(("Digita o número de CPF:\n "))))
+                    user = fu.usuario.verficar_cadastro(CPF)
+                    if user:
+                        CPF.desativar_usuario()
+                    else:
+                        print("Usuário não cadastrado!")
+                        
+                # Caso a resposta for "Q", voltará para o menu principal.
+                elif opcao_user == "Q":
+                    print("Sair")
+                    break
+                
+                else:
+                    print("Operação Inválida, por favor selecione novamente a operação desejada.")
+            
+                
+            break
+
+    elif opcao == "D":
         banco.deposito()
                     
     elif opcao == "S":
@@ -66,4 +126,3 @@ while True:
         break
     else:
         print("Operação Inválida, por favor selecione novamente a operação desejada.")
-         """

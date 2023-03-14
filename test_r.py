@@ -95,8 +95,6 @@ print(ativ)
 #desativar_usuario("123461365123")
 
 
-
-
 f = pd.read_excel("dados\clientes.xlsx")
 print(f)
 
