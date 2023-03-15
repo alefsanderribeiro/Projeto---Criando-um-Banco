@@ -17,9 +17,7 @@ Escolhe uma opção para prosseguir:
 
 
 U = "Usuário"
-D = "Deposito"
-S = "Saque"
-E = "Extrato"
+C = "Conta Bancária"
 Q = "Sair"
 
 """
@@ -34,6 +32,37 @@ D = "Desativar Usuário"
 Q = "Sair"
 
 """
+
+
+menu_conta = """
+Escolhe uma opção para prosseguir:
+
+
+C = "Cadastro de nova Conta"
+E = "Extrato"
+M = "Movimentação de valor"
+A = "Ativar Conta"
+D = "Desativar Conta"
+T = "Trocar de Senha"
+Q = "Sair"
+
+"""
+
+menu_mov_valor = """
+
+Escolhe uma opção para prosseguir:
+
+
+D = "Depósito"
+S = "Saque"
+T = "Transferir entre contas"
+Q = "Sair"
+
+
+"""
+
+
+
 
 # Endereço: Logradouro, número - bairro - cidade/Sigla Estado.
 # O CPF deve ter somente um número cadastrado, do tipo String.
@@ -64,9 +93,6 @@ historico_saque = ""
 #print(dados.verficar_cadastro())
 #usuario.ativar_usuario("01912841223")
 
-
-banco = fb.banco(agencia, conta, saldo ,qtd_saque_efetuado, historico_deposito, historico_saque)
-
 while True:
     opcao = str(input(menu_principal)).upper()
     
@@ -78,29 +104,32 @@ while True:
                 
                 # Caso a resposta for "C", será feiro o cadastro do usuário.
                 if opcao_user == "C":
-                    CPF = fu.usuario(str(input(("Digita o número de CPF:\n "))))
-                    user = fu.usuario.verficar_cadastro(CPF)
-                    if user:
+                    CPF = str(input(("Digita o número de CPF:\n ")))
+                    user = fu.usuario(CPF)
+                    verif = user.verficar_cadastro()
+                    if verif:
                         print("Usuário já cadastrado")
                     
                     else:
-                        CPF.adicionar_usuario()
+                        user.adicionar_usuario()
                 # Caso a resposta for "A", será feiro a Ativação do usuário.
                 elif opcao_user == "A":
-                    CPF = fu.usuario(str(input(("Digita o número de CPF:\n "))))
-                    user = fu.usuario.verficar_cadastro(CPF)
+                    CPF = str(input(("Digita o número de CPF:\n ")))
+                    user = fu.usuario(CPF)
+                    verif = user.verficar_cadastro()
                     
-                    if user:
-                        CPF.ativar_usuario()
+                    if verif:
+                        user.ativar_usuario()
                     else:
                         print("Usuário não cadastrado!")
                         
                 # Caso a resposta for "D", será feiro a desativação do usuário
                 elif opcao_user == "D":
-                    CPF = fu.usuario(str(input(("Digita o número de CPF:\n "))))
-                    user = fu.usuario.verficar_cadastro(CPF)
-                    if user:
-                        CPF.desativar_usuario()
+                    CPF = str(input(("Digita o número de CPF:\n ")))
+                    user = fu.usuario(CPF)
+                    verif = user.verficar_cadastro()
+                    if verif:
+                        user.desativar_usuario()
                     else:
                         print("Usuário não cadastrado!")
                         
@@ -115,13 +144,87 @@ while True:
                 
             break
 
-    elif opcao == "D":
-        banco.deposito()
+    elif opcao == "C":
+        
+
+        while True:
+            
+            while True:
+                opcao_conta = str(input(menu_conta)).upper()
+                
+                # Caso a resposta for "C", será feiro o cadastro do usuário.
+                if opcao_conta == "C":
+                    CPF = str(input(("Digita o seu número de CPF:\n ")))
+                    user = fu.usuario(CPF)
+                    verif = user.verficar_cadastro()
+                    if verif:
+                        print("Prosseguir com a criação da conta")
+                        banco = fb.banco()
+                        conta = banco.criar_conta(CPF)
+                        print(conta)
                     
-    elif opcao == "S":
-        banco.saque()
-    elif opcao == "E":
-        banco.extrato()        
+                    else:
+                        
+                        print("Usuário não encontrado!")
+                        
+                elif opcao_conta == "E":
+                    pass
+                
+                
+                # Caso a resposta for "A", será feiro a Ativação da conta.
+                elif opcao_conta == "A":
+                    pass
+                
+                
+                # Caso a resposta for "S", será feiro a Movimentação do valor da conta.
+                elif opcao_conta == "M":
+                    pass
+                    while True:
+                        opcao_conta_mov = str(input(menu_mov_valor)).upper()
+                        if opcao_conta_mov == "D":
+                            pass
+                        elif opcao_conta_mov == "S":
+                            pass
+                        elif opcao_conta_mov == "T":
+                            pass
+                        elif opcao_conta_mov == "Q":
+                            break
+                        else:
+                            print("Operação Inválida, por favor selecione novamente a operação desejada.")
+                        
+                # Caso a resposta for "D", será feiro a desativação da conta
+                elif opcao_conta == "D":
+                    pass
+                
+                
+                # Caso a resposta for "T", será feita a troca da senha
+                elif opcao_conta == "T":
+                    cpf_ou_conta = str(input(("Digita o número de CPF ou o número da Conta:\n ")))
+                    banco = fb.banco()
+                    verif = banco.verificar_contas(cpf_ou_conta)
+                    if verif == "":
+                        print("Nada foi encontrado no nosso banco de dados. Por favor, revise os dados fornecidos.")
+                    else:
+                        conta = str(input(("Digita o número da Conta que deseja alterar senha.\n ")))
+                        banco.alterar_senha(conta)
+                        #print(verif)
+                        
+                        
+                        
+                        
+                # Caso a resposta for "Q", voltará para o menu principal.
+                elif opcao_conta == "Q":
+                    print("Sair")
+                    break
+                
+                else:
+                    print("Operação Inválida, por favor selecione novamente a operação desejada.")
+            
+                
+            break
+
+                    
+                        
     elif opcao == "Q":
         break
     else:

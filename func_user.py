@@ -4,8 +4,6 @@ from pathlib import Path
 
 ARQUIVO_CLIENTES = Path() / "dados" / "clientes.xlsx"
 
-print(ARQUIVO_CLIENTES)
-
 class usuario(object):
     def __init__(self, CPF: str):
         self.CPF = CPF
@@ -55,7 +53,7 @@ class usuario(object):
             for i in range(len(dados)): #inserir os dados na mesma linha
                 aba.cell(row = line, column = 3+i).value = dados[i]
             f.save(ARQUIVO_CLIENTES)
-            print(f"Cadastro realizado com Sucesso!\nID cliente n° {id_cadastro}")
+            print(f"Cadastro realizado com Sucesso!\nID cliente n° {id_cadastro}, com o status de {status_cadastro}.")
 
         else:
             print(f"O CPF {self.CPF} já está cadastrado. Realize o cadastro de um novo CPF")
@@ -77,6 +75,31 @@ class usuario(object):
                 elif status_cadastro == "Desativado":
                     print("Cadastro já encontra-se desativado!")
                     
+    def _informa_ID(self):
+        f = openpyxl.load_workbook(ARQUIVO_CLIENTES)
+        aba = f.active
+        
+        for i in range(1, len(aba['C']) + 1):
+            
+            if self.CPF == aba[f'C{i}'].value:
+                id_cadastro = aba[f'A{i}'].value
+
+                break
+        return id_cadastro
+    
+    def _informa_Status(self):
+        f = openpyxl.load_workbook(ARQUIVO_CLIENTES)
+        aba = f.active
+        
+        for i in range(1, len(aba['C']) + 1):
+            
+            if self.CPF == aba[f'C{i}'].value:
+                status_cadastro = aba[f'B{i}'].value
+                resultado = status_cadastro
+                break
+        return resultado
+
+    
     def ativar_usuario(self):
         
         f = openpyxl.load_workbook(ARQUIVO_CLIENTES)
@@ -100,5 +123,3 @@ def listar_usuarios():
     f = pd.read_excel(ARQUIVO_CLIENTES)
     print(f)
       
-
-listar_usuarios()
