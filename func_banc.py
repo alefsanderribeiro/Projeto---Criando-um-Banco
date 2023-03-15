@@ -24,7 +24,44 @@ class banco:
         return "Este é um banco feito "
         
 
+    def criar_conta(self):
+        pass
+    
+
+    
+    def excluir_conta(self):
+        pass
+    
+    
+    
+    def ativar_conta(self):
+        pass
+    
+    
+    
+    def desativar_conta(self):
+        pass
+    
+    
+    def verificar_contas(self):
+        pass
+    
+    
+    
+    
+    def tipo_conta(self):
+        pass
+    
+    
+    def transferir_mesmo_banco(self):
+        pass
+    
+    
+        
+    
+    
     def deposito(self):
+
         while True:
             valor_deposito = float(input("Insere o valor que deseja depositar:\n"))
             if valor_deposito > 0:
