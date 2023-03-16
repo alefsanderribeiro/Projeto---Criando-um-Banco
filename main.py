@@ -10,6 +10,12 @@
 
 import contas.conta as fb
 import contas.cliente as fu
+import banco_de_dados
+import autenticacao.autenticacao as aut
+import autenticacao.segurança as seg
+import logs
+import relatorios
+import transacoes
 
 
 menu_principal = """
@@ -105,8 +111,8 @@ while True:
                 # Caso a resposta for "C", será feiro o cadastro do usuário.
                 if opcao_user == "C":
                     CPF = str(input(("Digita o número de CPF:\n ")))
-                    user = fu.usuario(CPF)
-                    verif = user.verficar_cadastro()
+                    user = fu.Cliente(CPF)
+                    verif = aut.cadastro(CPF)
                     if verif:
                         print("Usuário já cadastrado")
                     
@@ -115,8 +121,8 @@ while True:
                 # Caso a resposta for "A", será feiro a Ativação do usuário.
                 elif opcao_user == "A":
                     CPF = str(input(("Digita o número de CPF:\n ")))
-                    user = fu.usuario(CPF)
-                    verif = user.verficar_cadastro()
+                    user = fu.Cliente(CPF)
+                    verif = aut.cadastro(CPF)
                     
                     if verif:
                         user.ativar_usuario()
@@ -126,8 +132,8 @@ while True:
                 # Caso a resposta for "D", será feiro a desativação do usuário
                 elif opcao_user == "D":
                     CPF = str(input(("Digita o número de CPF:\n ")))
-                    user = fu.usuario(CPF)
-                    verif = user.verficar_cadastro()
+                    user = fu.Cliente(CPF)
+                    verif = aut.cadastro(CPF)
                     if verif:
                         user.desativar_usuario()
                     else:
@@ -155,11 +161,11 @@ while True:
                 # Caso a resposta for "C", será feiro o cadastro do usuário.
                 if opcao_conta == "C":
                     CPF = str(input(("Digita o seu número de CPF:\n ")))
-                    user = fu.usuario(CPF)
-                    verif = user.verficar_cadastro()
+                    user = fu.Cliente(CPF)
+                    verif = aut.cadastro(CPF)
                     if verif:
                         print("Prosseguir com a criação da conta")
-                        banco = fb.banco()
+                        banco = fb.Conta()
                         conta = banco.criar_conta(CPF)
                         print(conta)
                     
@@ -200,18 +206,15 @@ while True:
                 # Caso a resposta for "T", será feita a troca da senha
                 elif opcao_conta == "T":
                     cpf_ou_conta = str(input(("Digita o número de CPF ou o número da Conta:\n ")))
-                    banco = fb.banco()
-                    verif = banco.verificar_contas(cpf_ou_conta)
+                    banco = fb.Conta()
+                    verif = aut.contas(cpf_ou_conta)
                     if verif == "":
                         print("Nada foi encontrado no nosso banco de dados. Por favor, revise os dados fornecidos.")
                     else:
-                        conta = str(input(("Digita o número da Conta que deseja alterar senha.\n ")))
-                        banco.alterar_senha(conta)
-                        #print(verif)
-                        
-                        
-                        
-                        
+                        numero_conta = str(input(("Digita o número da Conta que deseja alterar senha.\n ")))
+                        resultado = seg.Senha(numero_conta).alterar_senha()
+                        #banco.alterar_senha(conta)
+ 
                 # Caso a resposta for "Q", voltará para o menu principal.
                 elif opcao_conta == "Q":
                     print("Sair")
@@ -219,12 +222,10 @@ while True:
                 
                 else:
                     print("Operação Inválida, por favor selecione novamente a operação desejada.")
-            
-                
+        
             break
 
-                    
-                        
+              
     elif opcao == "Q":
         break
     else:

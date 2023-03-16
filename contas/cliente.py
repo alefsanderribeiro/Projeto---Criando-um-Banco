@@ -1,11 +1,13 @@
+from pathlib import Path
+import sys
+sys.path.append(str(Path().absolute()))
 import openpyxl
 import pandas as pd
-from pathlib import Path
+import autenticacao.autenticacao as aut
+import banco_de_dados.banco_dados as bd
 
-ARQUIVO_CLIENTES = Path() / "contas" / "dados" / "clientes.xlsx"
 
-
-class usuario(object):
+class Cliente(object):
     def __init__(self, CPF: str):
         self.CPF = CPF
 
@@ -16,21 +18,7 @@ class usuario(object):
     
     def __doc__(self):
         pass
-        
-    def verficar_cadastro(self):
-
-        f = openpyxl.load_workbook(ARQUIVO_CLIENTES)
-        aba = f.active
-        
-        for i in range(1, len(aba['C']) + 1):
-            
-            if self.CPF == aba[f'C{i}'].value:
-                resultado = True
-                break
-            else:
-                resultado = False
-        return resultado
-            
+         
     def adicionar_usuario(self):
         
         nome = str(input("Digita o seu nome completo:\n "))
@@ -42,10 +30,10 @@ class usuario(object):
         dados = [self.CPF, nome, data_nascimento, 
                           f"Endereço: {endereçoRua}, {endereçoNumero} - bairro: {endereçoBairro} - {endereçoCidade}"]
         
-        verif = self.verficar_cadastro()
+        verif = aut.cadastro(self.CPF)
     
         if verif == False:
-            f = openpyxl.load_workbook(ARQUIVO_CLIENTES)
+            f = openpyxl.load_workbook(bd.arquivo_clientes)
             aba = f.active
             line = len(aba['A']) + 1
             id_cadastro = aba.cell(row = line, column = 1).value = int(line - 1) #criado um ID para o cliente
@@ -53,7 +41,7 @@ class usuario(object):
             
             for i in range(len(dados)): #inserir os dados na mesma linha
                 aba.cell(row = line, column = 3+i).value = dados[i]
-            f.save(ARQUIVO_CLIENTES)
+            f.save(bd.arquivo_clientes)
             print(f"Cadastro realizado com Sucesso!\nID cliente n° {id_cadastro}, com o status de {status_cadastro}.")
 
         else:
@@ -61,7 +49,7 @@ class usuario(object):
             
     def desativar_usuario(self):
         
-        f = openpyxl.load_workbook(ARQUIVO_CLIENTES)
+        f = openpyxl.load_workbook(bd.arquivo_clientes)
         aba = f.active
             
         for i in range(1, len(aba['C']) + 1):
@@ -71,13 +59,13 @@ class usuario(object):
                 if status_cadastro != "Desativado":
                     aba.cell(row = i, column = 2).value = "Desativado"
                     print(f"O cadastro com o ID cliente n° {id_cadastro}, foi desativado com sucesso!")
-                    f.save(ARQUIVO_CLIENTES)
+                    f.save(bd.arquivo_clientes)
                     break
                 elif status_cadastro == "Desativado":
                     print("Cadastro já encontra-se desativado!")
                     
     def _informa_ID(self):
-        f = openpyxl.load_workbook(ARQUIVO_CLIENTES)
+        f = openpyxl.load_workbook(bd.arquivo_clientes)
         aba = f.active
         
         for i in range(1, len(aba['C']) + 1):
@@ -89,7 +77,7 @@ class usuario(object):
         return id_cadastro
     
     def _informa_Status(self):
-        f = openpyxl.load_workbook(ARQUIVO_CLIENTES)
+        f = openpyxl.load_workbook(bd.arquivo_clientes)
         aba = f.active
         
         for i in range(1, len(aba['C']) + 1):
@@ -103,7 +91,7 @@ class usuario(object):
     
     def ativar_usuario(self):
         
-        f = openpyxl.load_workbook(ARQUIVO_CLIENTES)
+        f = openpyxl.load_workbook(bd.arquivo_clientes)
         aba = f.active
     
         for i in range(1, len(aba['C']) + 1):
@@ -114,13 +102,13 @@ class usuario(object):
        
                 if status_cadastro == "Desativado":
                     aba.cell(row = i, column = 2).value = "Ativado"
-                    f.save(ARQUIVO_CLIENTES)
+                    f.save(bd.arquivo_clientes)
                     print(f"O cadastro com o ID cliente n° {id_cadastro}, foi Ativado com sucesso!")
                     break
                 elif status_cadastro == "Ativado":
                     print("Cadastro já encontra-se desativado!")
                     
 def listar_usuarios():
-    f = pd.read_excel(ARQUIVO_CLIENTES)
+    f = pd.read_excel(bd.arquivo_clientes)
     print(f)
       
