@@ -8,8 +8,8 @@
 
 # Extrato: Deve listar todos os depósitos e saques realizados na conta. Mostrar o saldo final em "R$ XXX.XX".
 
-import func_banc as fb
-import func_user as fu
+import contas.conta as fb
+import contas.cliente as fu
 
 
 menu_principal = """
