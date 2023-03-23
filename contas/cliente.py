@@ -3,13 +3,15 @@ import sys
 sys.path.append(str(Path().absolute()))
 import openpyxl
 import pandas as pd
-import autenticacao.autenticacao as aut
+import autenticacao.autenticacao_conta  as aut_conta
+import autenticacao.autenticacao_senha  as aut_senha
+from autenticacao.criptografia  import Crypt
 import banco_de_dados.banco_dados as bd
 
 
-class Cliente(object):
+class Cliente:
     def __init__(self, CPF: str):
-        self.CPF = CPF
+        self.CPF = Crypt().crypt(CPF)
 
     
     def __str__(self):
@@ -21,37 +23,55 @@ class Cliente(object):
          
     def adicionar_usuario(self):
         
-        nome = str(input("Digita o seu nome completo:\n "))
-        data_nascimento = str(input("Digita a sua data de Nascimento:\n "))
-        endereçoRua = str(input("Vamos cadastrar o seu endereço:\nDigita o nome da sua rua/av:\n"))
-        endereçoNumero = str(input("Digita o nome número do seu endereço:\n"))
-        endereçoBairro = str(input("Digita o bairro :\n"))
-        endereçoCidade = str(input("Digita o nome da cidade/Estado:\n"))
-        dados = [self.CPF, nome, data_nascimento, 
-                          f"Endereço: {endereçoRua}, {endereçoNumero} - bairro: {endereçoBairro} - {endereçoCidade}"]
-        
-        verif = aut.cadastro(self.CPF)
-    
-        if verif == False:
-            f = openpyxl.load_workbook(bd.arquivo_clientes)
-            aba = f.active
-            line = len(aba['A']) + 1
-            id_cadastro = aba.cell(row = line, column = 1).value = int(line - 1) #criado um ID para o cliente
-            status_cadastro = aba.cell(row = line, column = 2).value = "Ativado" # colocando o Status do usuário de "Ativado"
-            
-            for i in range(len(dados)): #inserir os dados na mesma linha
-                aba.cell(row = line, column = 3+i).value = dados[i]
-            f.save(bd.arquivo_clientes)
-            print(f"Cadastro realizado com Sucesso!\nID cliente n° {id_cadastro}, com o status de {status_cadastro}.")
-
-        else:
+        verif = bd.Procurar.cpf(self.CPF)
+        if verif:
             print(f"O CPF {self.CPF} já está cadastrado. Realize o cadastro de um novo CPF")
+        
+        else:
+        
+            nome = Crypt().crypt(str(input("Digita o seu nome completo:\n ")))
+            data_nascimento = Crypt().crypt(str(input("Digita a sua data de Nascimento:\n ")))
+            endereçoRua = Crypt().crypt(str(input("Vamos cadastrar o seu endereço:\nDigita o nome da sua rua/av:\n")))
+            endereçoNumero = Crypt().crypt(str(input("Digita o nome número do seu endereço:\n")))
+            endereçoBairro = Crypt().crypt(str(input("Digita o bairro:\n")))
+            endereçoCidade = Crypt().crypt(str(input("Digita o nome da cidade:\n")))
+            endereçoEstado = Crypt().crypt(str(input("Digita o nome do Estado:\n")))
+
+            telefone = Crypt().crypt(str(input("Digita o seu telefone pessoal:\n")))
+            email = Crypt().crypt(str(input("Digita o seu email pessoal:\n")))
+            # dados_completo = [nome, data_nascimento, 
+            #         f"{endereçoRua}, {endereçoNumero} - bairro: {endereçoBairro} - {endereçoCidade}", 
+            #         telefone, email]
             
+            senha = aut_senha.Senha(self.CPF)._nova_senha(conta_ou_usuario="usuario")
+
+            resultado = bd.Inserir.dados_cliente(self.CPF, 
+                                                nome=nome, 
+                                                data_nascimento=data_nascimento, 
+                                                enderecoRua=endereçoRua,
+                                                enderecoNumero=endereçoNumero,
+                                                enderecoBairro=endereçoBairro,
+                                                enderecoCidade=endereçoCidade,
+                                                enderecoEstado=endereçoEstado,
+                                                telefone=telefone, 
+                                                email=email, 
+                                                senha=senha)
+            
+            if resultado:
+
+                id_cadastro = bd.Procurar(self.CPF).procurar_id()
+                status_cadastro = bd.Procurar(self.CPF).procurar_status()
+                print(f"Cadastro realizado com Sucesso!\nID cliente n° {id_cadastro}, \
+                    com o status de {status_cadastro}.")
+            else:
+                print("Não foi possível cadastrar o usuário!")
+
+
     def desativar_usuario(self):
         
         f = openpyxl.load_workbook(bd.arquivo_clientes)
         aba = f.active
-            
+        
         for i in range(1, len(aba['C']) + 1):
             if self.CPF == aba[f'C{i}'].value:
                 id_cadastro = aba[f'A{i}'].value

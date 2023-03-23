@@ -6,12 +6,12 @@ from datetime import datetime
 import openpyxl
 import pandas as pd
 
-from .cliente import Cliente
+from contas.cliente import Cliente
 # from configuracoes.banco_dados import arquivo_cliente
 # banco_dados.arquivo_cliente()
 
 import banco_de_dados.banco_dados as bd
-import autenticacao.segurança as seg
+import autenticacao.autenticacao_senha as aut
 
 class Conta:
     
@@ -58,7 +58,7 @@ class Conta:
             limite_valor_saque = aba.cell(row = line, column = 6).value = self.LIMITE_VALOR_SAQUE # inserindo o valor limite do saque.
             limite_quant_saque = aba.cell(row = line, column = 7).value = self.LIMITE_QUANT_SAQUE # inserindo a quantidade do saque diário.
             f.save(bd.arquivo_contas)
-            senha = seg.Senha(numero_conta)._nova_senha()
+            senha = aut.Senha(numero_conta)._nova_senha(conta_ou_usuario="conta")
             
             resultado = f"""Cadastro realizado com Sucesso!
                             Conta n°: {numero_conta}
