@@ -7,6 +7,7 @@ arquivo_clientes = Path().absolute() / "banco_de_dados" / "clientes.xlsx"
 arquivo_contas = Path().absolute()  / "banco_de_dados" / "contas.xlsx"
 
 from banco_de_dados import config as BD
+from autenticacao.criptografia  import Crypt
 import mysql.connector
 
 
@@ -18,6 +19,9 @@ meuDB = mysql.connector.connect(
 )
 
 mycursor = meuDB.cursor()
+
+chave = Crypt().chave_crypto().decode()
+print(chave)
 
 class Tabela:
 
@@ -99,27 +103,43 @@ def mostrar_bancos_de_dados():
 
 class Procurar:
     def __init__(self, CPF):
-        self.CPF = str(CPF)
+        self.CPF = CPF
+        
     def cpf(self):
+        mycursor.execute(f"SELECT cpf FROM clientes WHERE AES_DECRYPT(UNHEX(cpf), ('{chave}')) = '{self.CPF}'")
+        cpf = mycursor.fetchone()[0]     
+        if cpf == None:
+            resultado = False
+            
+        else:
+            resultado = True
+        return resultado
 
-        try:
-            mycursor.execute(f"SELECT id FROM clientes WHERE cpf ='{self.CPF}'")
-            mycursor.fetchone()[0]
-            return True # Será verdadeiro se o CPF existir no banco de dados.
-        except:
-            return False # Será false se o CPF não existir no banco de dados.
+    def id(self):
+        mycursor.execute(f"SELECT id FROM clientes WHERE AES_DECRYPT(UNHEX(cpf), ('{chave}')) = '{self.CPF}'")
+        id = mycursor.fetchone()[0]     
+        if id != None:
+            resultado = id
+        else:
+            resultado = "Error"
+        return resultado
 
     def procurar_conta(self):
-        pass
+        mycursor.execute(f"SELECT id, id_agencia, id_conta FROM contas WHERE AES_DECRYPT(UNHEX(id_cliente), ('{chave}')) = '{self.id}'")
+        id = mycursor.fetchall()  
+        if id != None:
+            resultado = id
+        else:
+            resultado = "Error"
+        return resultado
     
 
-    def procurar_id(self):
-        try:
-            mycursor.execute(f"SELECT id FROM clientes WHERE cpf={self.CPF}")
-            id = mycursor.fetchone()[0]
-            return id# Será verdadeiro se o CPF existir no banco de dados.
-        except:
-            return "Error" # Será false se o CPF não existir no banco de dados.
+        # try:
+        #     mycursor.execute(f"SELECT id FROM clientes WHERE cpf={self.CPF}")
+        #     id = mycursor.fetchone()[0]
+        #     return id# Será verdadeiro se o CPF existir no banco de dados.
+        # except:
+        #     return "Error" # Será false se o CPF não existir no banco de dados.
     
     def procurar_status(self):
         try:
@@ -136,40 +156,77 @@ class Procurar:
         pass
         
 
+resultado = Procurar("01912841223").id()
+
+print(resultado)
+
 class Inserir:
     
     def dados_cliente(CPF:str, 
-                        nome:str=None, 
-                        data_nascimento:str=None, 
-                        endereco:str=None, 
-                        email:str=None, 
-                        telefone:str=None, 
-                        senha:str=None ):
+                status=1, 
+                nome:str=None, 
+                data_nascimento:str=None, 
+                enderecoRua:str=None, 
+                enderecoNumero:str=None,
+                enderecoBairro:str=None,
+                email:str=None, 
+                telefone:str=None, 
+                senha:str=None ):
         dados = ""
+        coluna_dados = ""
+
         if nome != None:
-            dados += f" , '{nome}'"
+            dados += f"HEX(AES_ENCRYPT(('{nome}'), ('{chave}'))), "
+            coluna_dados += ", nome"
+            
         if data_nascimento != None:
-            dados += f" , '{data_nascimento}'"
-        if endereco != None:
-            dados +=f" , '{endereco}'"
+            dados += f"HEX(AES_ENCRYPT(('{data_nascimento}'), ('{chave}'))), "
+            coluna_dados += ", data_nascimento"
+
+        if enderecoRua != None:
+            dados +=f"HEX(AES_ENCRYPT(('{enderecoRua}'), ('{chave}'))), "
+            coluna_dados += ", enderecoRua"
+            
+        if enderecoNumero != None:
+            dados +=f"HEX(AES_ENCRYPT(('{enderecoNumero}'), ('{chave}'))), "
+            coluna_dados += ", enderecoNumero"
+            
+        if enderecoBairro != None:
+            dados +=f"HEX(AES_ENCRYPT(('{enderecoBairro}'), ('{chave}'))), "
+            coluna_dados += ", enderecoBairro"
+            
         if email != None:
-            dados += f" , '{email}'"
+            dados += f"HEX(AES_ENCRYPT(('{email}'), ('{chave}'))), "
+            coluna_dados += ", email"
+            
         if telefone != None:
-            dados += f" , '{telefone}'"
+            dados += f"HEX(AES_ENCRYPT(('{telefone}'), ('{chave}'))), "
+            coluna_dados += ", telefone"
+            
         if senha != None:
-            dados += f" , '{senha}'"
-                    
+            dados += f"HEX(AES_ENCRYPT(('{senha}'), ('{chave}'))), "
+            coluna_dados += ", senha"
+                     
+        dados = dados[:-2]
+          
+        status = f"{status}"
+        CPF = f"HEX(AES_ENCRYPT(('{CPF}'), ('{chave}')))"
+                  
         resultado = Procurar(CPF).cpf()
         
-        print(dados)
+        print(f"INSERT INTO clientes (status, cpf {coluna_dados})\
+                VALUES ({status}, {CPF}, {dados})")
+        
         if resultado:
             print(f"O CPF informado já encontra-se cadastrado.")
             resultado = False
+        
         else:
             try: 
-                mycursor.execute(f"INSERT INTO clientes(status, cpf, nome, data_nascimento, \
-                endereco, email, telefone, senha)\
-                VALUES(1, '{CPF}' {dados})")
+                
+                mycursor.execute(f"INSERT INTO clientes (status, cpf {coluna_dados})\
+                    VALUES ({status}, {CPF}, {dados})")
+                
                 # Ao inserir um novo cadastro, o usuário já vem "Ativado" por padrão.
                 # id = mycursor.fetchall()
                 meuDB.commit()
@@ -181,24 +238,28 @@ class Inserir:
 
         return resultado
     
-    def dados_conta():
-        pass
+# Inserir.dados_cliente("04240084245", nome="Geissilaine")
+
+    # def dados_conta():
+    #     pass
     
 class Atualizar:
     
-    def dados_cliente(CPF:str, 
+    def dados_cliente(CPF:str,
+                status=1,
                 nome:str=None, 
                 data_nascimento:str=None, 
                 enderecoRua:str=None, 
                 enderecoNumero:str=None,
                 enderecoBairro:str=None,
                 enderecoCidade:str=None,
-                enderecoEstado:str=None,
                 email:str=None, 
                 telefone:str=None, 
                 senha:str=None ):
         
         dados = ""
+        if status == 0:
+            dados += f"status='{status}', "
         if nome != None:
             dados += f"nome='{nome}', "
         if data_nascimento != None:
@@ -206,11 +267,11 @@ class Atualizar:
         if enderecoRua != None:
             dados +=f"enderecoRua='{enderecoRua}', "
         if enderecoBairro != None:
+            dados +=f"enderecoNumero='{enderecoNumero}', "
+        if enderecoBairro != None:
             dados +=f"enderecoBairro='{enderecoBairro}', "
         if enderecoCidade != None:
             dados +=f"enderecoCidade='{enderecoCidade}', "
-        if enderecoEstado != None:
-            dados +=f"enderecoEstado='{enderecoEstado}', "
         if email != None:
             dados += f"email='{email}', "
         if telefone != None:
@@ -236,6 +297,7 @@ class Atualizar:
         pass
 
 
+
 # Atualizar.dados_cliente("01912841223", 
 #                         senha="123456", 
 #                         endereco="R. Escorpião, 11700. Bairro: Ulisses Guimarães. Porto Velho/RO", 
@@ -250,7 +312,7 @@ class Atualizar:
 
 
 def selecionar_tabela():
-    CPF = '01912841223'
+    CPF = '04240084245'
     mycursor.execute(f"SELECT id FROM clientes WHERE cpf={CPF}")
 
     print(mycursor.fetchall())
@@ -258,5 +320,41 @@ def selecionar_tabela():
 #selecionar_tabela()
 #resposta = Inserir.dados_cliente("04240084245")
 #print(resposta)
+
+
+
+    """
+# Comando no SQL para criptografar e descriptografar dados salvos
+    
+
+INSERT INTO historico_transacoes (funcao_nome, log)
+VALUES (HEX(AES_ENCRYPT(("01912841223"), (SELECT hash FROM chave WHERE chave.id=1))));
+
+
+INSERT INTO historico_transacoes (funcao_nome, log)
+VALUES (HEX(AES_ENCRYPT(("01912841223"), (SELECT hash FROM chave WHERE chave.id=1))), AES_ENCRYPT("01912841223", (SELECT hash FROM chave WHERE chave.id=1)));
+
+INSERT INTO historico_transacoes (log)
+VALUES (HEX(AES_ENCRYPT("01912841223", (SELECT hash FROM chave WHERE chave.id=1))));
+
+SELECT AES_DECRYPT(log, (SELECT hash FROM chave WHERE chave.id=1)) FROM historico_transacoes;
+
+
+/*
+
+Essas funções são para selecionar
+
+*/
+SELECT * FROM historico_transacoes WHERE AES_DECRYPT(log, (SELECT hash FROM chave WHERE chave.id=1)) = '01912841223';
+
+SELECT * FROM historico_transacoes WHERE AES_DECRYPT(UNHEX(funcao_nome), (SELECT hash FROM chave WHERE chave.id=1)) = '01912841223';
+
+SELECT id FROM historico_transacoes WHERE AES_DECRYPT(UNHEX(log), (SELECT hash FROM chave WHERE chave.id=1)) = '04240084245';
+
+
+
+    """
+
+
 
 

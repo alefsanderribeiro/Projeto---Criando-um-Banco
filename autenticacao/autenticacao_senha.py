@@ -21,13 +21,13 @@ argon2Hasher = argon2.PasswordHasher(
 
 class Senha: 
 
-    def __init__(self, numero_conta_ou_CPF):
+    def __init__(self, CPF=None, CONTA=None):
         
-        if len(numero_conta_ou_CPF) == 11:
-            self.CPF = Crypt().crypt(numero_conta_ou_CPF)
-        elif len(numero_conta_ou_CPF) < 11:
-            self.numero_conta = numero_conta_ou_CPF
-    
+        if CPF != None:
+            self.CPF = Crypt().crypt(CPF)
+        elif CONTA != None:
+            self.numero_conta = CONTA
+
 
     def _verificar_hash_senha(self):
         reHash = argon2Hasher.check_needs_rehash(hash)

@@ -43,11 +43,4 @@ class Crypt:
         descrypt = descrypt.decode()
 
         return descrypt
-    
 
-# nome = Crypt().crypt(str(input("Digita o seu nome completo:\n ")))
-# print(nome)
-
-
-# nome1 = Crypt().descrypt(nome)
-# print(nome1)
