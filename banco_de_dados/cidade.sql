@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS `cidade`;
 CREATE TABLE `cidade` (
   `id` int(11) NOT NULL,
   `nome` varchar(120) DEFAULT NULL,
-  `uf` int(2) DEFAULT NULL,
+  `estado_id` int(2) DEFAULT NULL,
   `ibge` int(7) DEFAULT NULL
 ) DEFAULT CHARSET=utf8 COMMENT='Municipios das Unidades Federativas';
 
@@ -14,7 +14,7 @@ CREATE TABLE `cidade` (
 -- Inserindo dados na tabela "cidade"
 --
 
-INSERT INTO `cidade` (`id`, `nome`, `uf`, `ibge`) VALUES
+INSERT INTO `cidade` (`id`, `nome`, `estado_id`, `ibge`) VALUES
 (1, 'Afonso Cláudio', 8, 3200102),
 (2, 'Água Doce do Norte', 8, 3200169),
 (3, 'Águia Branca', 8, 3200136),

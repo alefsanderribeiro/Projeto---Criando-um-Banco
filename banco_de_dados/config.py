@@ -1,7 +1,7 @@
 
 
 # Banco de Dados
-endereço_host = "34.95.148.177"
+endereço_host = "127.0.0.1"
 usuario = "root"
 senha = ".Alefe161277"
 meu_banco_dados = "banco-digital"

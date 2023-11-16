@@ -7,7 +7,7 @@ CREATE TABLE `estado` (
   `nome` varchar(75) DEFAULT NULL,
   `uf` varchar(2) DEFAULT NULL,
   `ibge` int(2) DEFAULT NULL,
-  `pais` int(3) DEFAULT NULL,
+  `pais_id` int(3) DEFAULT NULL,
   `ddd` varchar(50) DEFAULT NULL
 ) DEFAULT CHARSET=utf8 COMMENT='Unidades Federativas';
 
@@ -15,7 +15,7 @@ CREATE TABLE `estado` (
 -- Inserindo dados na tabela "estado"
 --
 
-INSERT INTO `estado` (`id`, `nome`, `uf`, `ibge`, `pais`, `ddd`) VALUES
+INSERT INTO `estado` (`id`, `nome`, `uf`, `ibge`, `pais_id`, `ddd`) VALUES
 (1, 'Acre', 'AC', 12, 1, '68'),
 (2, 'Alagoas', 'AL', 27, 1, '82'),
 (3, 'Amazonas', 'AM', 13, 1, '97,92'),
@@ -43,7 +43,7 @@ INSERT INTO `estado` (`id`, `nome`, `uf`, `ibge`, `pais`, `ddd`) VALUES
 (25, 'Sergipe', 'SE', 28, 1, '79'),
 (26, 'São Paulo', 'SP', 35, 1, '11,12,13,14,15,16,17,18,19'),
 (27, 'Tocantins', 'TO', 17, 1, '63'),
-(99, 'Exterior', 'EX', 99, NULL, NULL);
+(99, 'Exterior', 'EX', 99, 99, NULL);
 
 --
 -- Indexes for table "estado"
