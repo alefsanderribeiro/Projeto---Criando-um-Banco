@@ -1,0 +1,13 @@
+{
+    "files": [
+        "main.py",
+        "interfaces/gui/cadastro_cliente.ui",
+        "interfaces/gui/janelaPrincipal.ui",
+        "interfaces/gui/login.ui",
+        "interfaces/imagens.qrc",
+        "interfaces/gui/cadastro_funcionario.ui",
+        "interfaces/gui/cadastro_fornecedor.ui",
+        "interfaces/gui/cadastro_transportador.ui",
+        "interfaces/imagens.qrc"
+    ]
+}

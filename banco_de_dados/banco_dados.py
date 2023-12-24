@@ -1,15 +1,11 @@
-from pathlib import Path
 import sys
+from pathlib import Path
 sys.path.append(str(Path().absolute()))
-
-#temporariamente estou usando esses "banco de dados", que são 2 planilhas ... k k k k k k k k 
-arquivo_clientes = Path().absolute() / "banco_de_dados" / "clientes.xlsx"
-arquivo_contas = Path().absolute()  / "banco_de_dados" / "contas.xlsx"
 
 from banco_de_dados import config as BD
 from autenticacao.criptografia  import Crypt
 import mysql.connector
-
+import logs
 
 meuDB = mysql.connector.connect(
     host=BD.endereço_host,
@@ -41,14 +37,14 @@ class _verificar:
         
         list = [10, 9, 8, 7, 6, 5, 4, 3, 2]
         
-        # Primeira Verificação
+        # Verificação do primeiro dígito
         soma = 0
         for i in range(9):
             soma += int(CPF[i]) * list[i]
         
         verificador1 = _verificar._resultado(soma)
        
-        # Segunda Verificação
+        # Verificação do segundo dígito
         soma = 0
         for i in range(9):
             soma += ((int(CPF[i+1]))) * list[i]
@@ -86,49 +82,50 @@ class Tabela:
         #mycursor.execute(f"ALTER TABLE {tabela} ADD COLUMN {coluna} {tipo}({tamanho}))")
         #mycursor.execute("ALTER TABLE contas ADD CONSTRAINT fk_conta_cliente FOREIGN KEY (id_user) REFERENCES clientes(id)")
         #mycursor.execute(f"ALTER TABLE contas ADD CONSTRAINT fk_conta_cliente FOREIGN KEY id REFERENCES clientes(id)")
-        mycursor.execute("ALTER TABLE contas ADD CONSTRAINT fk_conta_tipo_conta FOREIGN KEY (id_tipo_conta) REFERENCES tipo_contas(id)")
-
+        #mycursor.execute("ALTER TABLE contas ADD CONSTRAINT fk_conta_tipo_conta FOREIGN KEY (id_tipo_conta) REFERENCES tipo_contas(id)")
+        pass
     def criar_tabelas():
         # Exemplos:
         # mycursor.execute("CREATE TABLE socios (name VARCHAR(255))")
         # mycursor.execute("CREATE TABLE cnaes (name VARCHAR(255), address VARCHAR(255))")
-        mycursor.execute("CREATE TABLE clientes (id INT AUTO_INCREMENT PRIMARY KEY, \
-                        status BIT NOT NULL,\
-                        cpf VARCHAR(255) NOT NULL, \
-                        nome VARCHAR(255), \
-                        data_nascimento VARCHAR(255),\
-                        endereco VARCHAR(255),\
-                        email VARCHAR(255),\
-                        telefone VARCHAR(255),\
-                        senha VARCHAR(255))")
-        print(f"Tabela clientes criada com sucesso!")
+        #mycursor.execute("CREATE TABLE clientes (id INT AUTO_INCREMENT PRIMARY KEY, \
+        #                status BIT NOT NULL,\
+        #                cpf VARCHAR(255) NOT NULL, \
+        #                nome VARCHAR(255), \
+        #                data_nascimento VARCHAR(255),\
+        #                endereco VARCHAR(255),\
+        #                email VARCHAR(255),\
+        #                telefone VARCHAR(255),\
+        #                senha VARCHAR(255))")
         
-        mycursor.execute("CREATE TABLE contas (conta INT AUTO_INCREMENT PRIMARY KEY, \
-                        agencia VARCHAR(4),\
-                        status BIT NOT NULL,\
-                        id_user INT NOT NULL,\
-                        id_tipo_conta INT, \
-                        senha VARCHAR(255))")
-        print(f"Tabela contas criada com sucesso!")
+        #mycursor.execute("CREATE TABLE contas (conta INT AUTO_INCREMENT PRIMARY KEY, \
+        #                agencia VARCHAR(4),\
+        #                status BIT NOT NULL,\
+        #                id_user INT NOT NULL,\
+        #                id_tipo_conta INT, \
+        #                senha VARCHAR(255))")
         
-        mycursor.execute("CREATE TABLE tipo_contas (id INT AUTO_INCREMENT PRIMARY KEY,\
-                        descrição VARCHAR(20),\
-                        limite_valor_saque INT(4),\
-                        limite_qtd_saque_mensal INT(2),\
-                        limite_qtd_saque_diario INT(1))")
-        print(f"Tabela tipo_contas criada com sucesso!")
+        #mycursor.execute("CREATE TABLE tipo_contas (id INT AUTO_INCREMENT PRIMARY KEY,\
+        #                descrição VARCHAR(20),\
+        #                limite_valor_saque INT(4),\
+        #                limite_qtd_saque_mensal INT(2),\
+        #                limite_qtd_saque_diario INT(1))")
+        
         
         #mycursor.execute(f"ALTER TABLE contas ADD CONSTRAINT fk_conta_cliente FOREIGN KEY id REFERENCES clientes(id)")
         #mycursor.execute(f"CREATE TABLE {tabela} ({colunas} {tipo}({tamanho}))")
-
-# Tabela.criar_tabelas()
-# Tabela.alterar_tabela()
+        pass
+#Tabela.criar_tabelas()
+#Tabela.alterar_tabela()
 #Tabela.mostrar_tabelas()
 
 def mostrar_bancos_de_dados():
     mycursor.execute("SHOW DATABASES")
+    
+    logs.logging.info(f"Função: mostrar_bancos_de_dados() - Resultado:")
     for m in mycursor:
-        print(m)
+        logs.logging.info(m)
+    
 
 def últimoIdPessoa():
     mycursor.execute(f"SELECT idPessoa FROM pessoa ORDER BY idPessoa DESC limit 1")
@@ -137,7 +134,7 @@ def últimoIdPessoa():
         
     except:
         id = 0
-        
+    logs.logging.info(f"Função: últimoIdPessoa() - Resultado: {id}")
     return id
 
 
@@ -148,7 +145,7 @@ def últimoIdBairro():
         
     except:
         id = 0
-        
+    logs.logging.info(f"Função: últimoIdBairro() - Resultado: {id}")
     return id
 
 
@@ -159,7 +156,7 @@ def últimoIdCidade():
         
     except:
         id = 0
-        
+    logs.logging.info(f"Função: últimoIdCidade() - Resultado: {id}")
     return id
 
 
@@ -170,24 +167,33 @@ def últimoIdEndereço():
         
     except:
         id = 0
-        
+    logs.logging.info(f"Função: últimoIdEndereço() - Resultado: {id}")    
     return id
 
-print(últimoIdCidade())
+
+def últimoIdUser_Funcionario():
+    mycursor.execute(f"SELECT id FROM `user_sistema` ORDER BY idEndereço DESC limit 1")
+    try:
+        id = mycursor.fetchone()[0]
+        
+    except:
+        id = 0
+    logs.logging.info(f"Função: últimoIdEndereço() - Resultado: {id}")    
+    return id
 
 
 class Procurar:
     
     # Retorna se existe ou não o CPF informado
     def cpf(Número_do_CPF):
-        mycursor.execute(f"SELECT CPF FROM `pessoa física` WHERE AES_DECRYPT(UNHEX(CPF), ('{chave}')) = {Número_do_CPF}")
+        mycursor.execute(f"SELECT CPF FROM `cliente_pf_view` WHERE AES_DECRYPT(UNHEX(CPF), ('{chave}')) = {Número_do_CPF}")
         cpf = mycursor.fetchone()
         if cpf == None:
             resultado = False
             
         else:
             resultado = True
-            
+        logs.logging.info(f"Função: Procurar.cpf() - Resultado: {resultado}") 
         return resultado
     
     # Retorna se existe ou não o CNPJ informado
@@ -199,18 +205,20 @@ class Procurar:
             
         else:
             resultado = True
-            
+        logs.logging.info(f"Função: Procurar.cnpj() - Resultado: {resultado}") 
         return resultado
 
     
     #retorna o ID do cadastro do CPF
     def _id_pf(Número_do_CPF):
         mycursor.execute(f"SELECT `idPessoa Física` FROM `pessoa física` WHERE AES_DECRYPT(UNHEX(CPF), ('{chave}')) = {Número_do_CPF}")
+        logs.logging.info(f"Função: Procurar._id_pf() - Resultado: {mycursor.fetchone()[0]}")
         return mycursor.fetchone()[0]
 
     #retorna o ID do cadastro do CNPJ
     def _id_pj(Número_do_CNPJ):
         mycursor.execute(f"SELECT `idPessoa Jurídica` FROM `pessoa jurídica` WHERE AES_DECRYPT(UNHEX(CNPJ), ('{chave}')) = {Número_do_CNPJ}")
+        logs.logging.info(f"Função: Procurar._id_pj() - Resultado: {mycursor.fetchone()[0]}")
         return mycursor.fetchone()[0]
     
     
@@ -224,11 +232,11 @@ class Procurar:
             except:
                 id = 0
             
-            
         elif resultado == "CNPJ":
             mycursor.execute(f"SELECT `idPessoa` FROM `pessoa jurídica`  WHERE AES_DECRYPT(UNHEX(CNPJ), ('{chave}')) = {CPF_ou_CNPJ}")
             id = mycursor.fetchone()[0]
             
+        logs.logging.info(f"Função: Procurar.id_pessoa() - Resultado: {id}")    
         return id
         
 
@@ -239,6 +247,7 @@ class Procurar:
             resultado = id
         else:
             resultado = False
+        logs.logging.info(f"Função: Procurar.conta() - Resultado: {resultado}")    
         return resultado
     
 
@@ -256,7 +265,7 @@ class Procurar:
             
         except:
             id = False
-            
+        logs.logging.info(f"Função: Procurar.id_estado_pelo_nome() - Resultado: {id}")     
         return id
 
 
@@ -264,12 +273,12 @@ class Procurar:
         mycursor.execute(f"SELECT `estado`.`uf` FROM `estado` INNER JOIN `cidade` ON `estado`.`id` = `cidade`.`estado_id` WHERE `cidade`.`id` = '{id_cidade}'")
          
         try:
-            estado = mycursor.fetchone()[0]
+            resultado = mycursor.fetchone()[0]
             
         except:
-            estado = "ID não encontrado."
-            
-        return estado
+            resultado = "ID não encontrado."
+        logs.logging.info(f"Função: Procurar._uf_estado_pelo_ID_cidade() - Resultado: {resultado}")    
+        return resultado
     
     
     def cidade_pelo_id(id_cidade):
@@ -279,7 +288,7 @@ class Procurar:
             
         except:
             resultado = "ID não encontrado."
-            
+        logs.logging.info(f"Função: Procurar.cidade_pelo_id() - Resultado: {resultado}")    
         return resultado 
     
     def cidade(nome_da_cidade, id_etado):
@@ -300,7 +309,7 @@ class Procurar:
             resultado = []
             for i in range(len(cidade)):
                 resultado.append(f"ID: {cidade[i][0]} = {cidade[i][1]} / {Procurar._uf_estado_pelo_ID_cidade(cidade[i][0])}")
-                
+        logs.logging.info(f"Função: Procurar.cidade() - Resultado: {resultado}")         
         return resultado
     
     def bairro(nome_do_bairro, id_da_cidade):         
@@ -319,10 +328,10 @@ class Procurar:
             resultado = []
             for i in range(len(quantidade_bairro)):
                 resultado.append(f"ID: {bairro[i][0]} = {bairro[i][1]} - Cidade: {id_da_cidade} / {Procurar._uf_estado_pelo_ID_cidade(id_da_cidade)}")
-                
+        logs.logging.info(f"Função: Procurar.bairro() - Resultado: {resultado}")        
         return resultado
-    
-   
+
+    #Preciso arrumar essa função. Pois ainda não colqouei o "status do cliente" no banco de dados
     def status_do_cliente(self):
         try:
             mycursor.execute(f"SELECT status FROM clientes WHERE cpf={self.CPF}")
@@ -334,84 +343,138 @@ class Procurar:
         except:
             return "Error" # Será false se o CPF não existir no banco de dados.
     
-    def senha_do_cliente(self):
+    # Preciso arrumar. Ainda não defini como será a "senha do cliente"
+    def senha_do_cliente():
         pass
+    
+    
+    def senha_do_funcionario(id_cadastro, senha):
+        mycursor.execute(f"SELECT senha FROM `user_sistema` WHERE id = {id_cadastro} and AES_DECRYPT(UNHEX(senha), ('{chave}')) = '{senha}'")
+        res = mycursor.fetchone()
+        if res == None:
+            resultado = False
+            
+        else:
+            resultado = True
+        logs.logging.info(f"Função: Procurar.senha_do_funcionario() - Resultado: {resultado}") 
+        return resultado
+        
 
  
 
 def _gerar(dados):
     resultado = f"HEX(AES_ENCRYPT(('{dados}'), ('{chave}'))), "
+    logs.logging.info(f"Função: _gerar() - Resultado: {resultado}")
     return resultado
 
 class Inserir:
     
+    
+    def senha_funcionario_sistema(id_funcionário, nova_senha):
+        
+        senha = _gerar(nova_senha)
+        mycursor.execute(f"INSERT INTO `user_sistema` (id, id_funcionario, senha)\
+        VALUES ({últimoIdUser_Funcionario() + 1},{id_funcionário}, {senha})")
+        
+
     def _cidade(cidade:str, id_estado:str):
         try: 
             id_cidade = últimoIdCidade()
-            print(f"INSERT INTO cidade (id, nome, estado_id)\
-            VALUES ({id_cidade + 1},'{cidade}', {id_estado})") 
+            
             mycursor.execute(f"INSERT INTO cidade (id, nome, estado_id)\
             VALUES ({id_cidade + 1},'{cidade}', {id_estado})")
             
+            logs.logging.info(f"INSERT INTO cidade (id, nome, estado_id)\
+            VALUES ({id_cidade + 1},'{cidade}', {id_estado})")
 
             meuDB.commit()
             resultado = True
         except mysql.connector.Error as error:
-            print("Falha na inserção dos dados!: {}".format(error))
+
+            logs.logging.error("Falha na inserção dos dados!: {}".format(error))
             meuDB.rollback()
             resultado = False
+        logs.logging.info(f"Função: Inserior._cidade() - Resultado: {resultado}")
         return resultado
 
     def _bairro(bairro:str, id_cidade:int):
         try: 
             mycursor.execute(f"INSERT INTO bairros (id, nome, cidade_id)\
             VALUES ({últimoIdBairro() + 1},'{bairro}', {id_cidade})") 
+            
+            logs.logging.info(f"INSERT INTO bairros (id, nome, cidade_id)\
+            VALUES ({últimoIdBairro() + 1},'{bairro}', {id_cidade})")
+            
             meuDB.commit()
             resultado = True
         except mysql.connector.Error as error:
-
-            print("Falha na inserção dos dados!: {}".format(error))
+            
+            logs.logging.error("Falha na inserção dos dados!: {}".format(error))
             meuDB.rollback()
             resultado = False
+        logs.logging.info(f"Função: Inserior._cidade() - Resultado: {resultado}")    
         return resultado
     
+    def _telefone():
+        pass
     
+    
+    # Arrumar a função para inserir telefone do cliente.
     def telefone(id):
         
-        print("Cadastro do telefone realizado com sucesso")
+        logs.logging.info("Cadastro do telefone realizado com sucesso")
         pass
         
-
-    def endereço(CPF_ou_CNPJ:str, CEP:str, logradouro:str, número:str, complemento:str, bairro:str, cidade:str, estado:str):
+    # Inserior o endereço do cliente
+    def endereço(CPF_ou_CNPJ:str,
+                 CEP:str, 
+                 logradouro:str, 
+                 número:str, 
+                 complemento:str, 
+                 bairro:str, 
+                 cidade:str, 
+                 estado:str):
 
         id_pessoa = Procurar.id_pessoa(CPF_ou_CNPJ)
         id_estado = Procurar.id_estado_pelo_nome(estado)
+        id_do_último_Endereço = últimoIdEndereço() + 1
         if id_estado == False:
             #precisa verificar se o nome do estado está correto.
-            print("ID do Estado não encontrado")
+            logs.logging.info("ID do Estado não encontrado")
         else:
+            
+            # Esse é o Loope para a cidade.
             loop1 = True
             while loop1 == True:
+                
+                logs.logging.info("Procurar se a cidade está cadastrado!")
                 resultadoCidade = Procurar.cidade(cidade, id_estado)
                 
                 if resultadoCidade == False:
                     #Cadastrar o nome da cidade
+                    logs.logging.info("Cidade não cadastrada. Vamos realizar o cadastro!")
                     Inserir._cidade(cidade, id_estado)
                     
                 elif type(resultadoCidade) == int:
-                    idCidade = resultadoCidade
                     
-                    print("Cidade única cadastrada")
+                    idCidade = resultadoCidade
+                    logs.logging.info("Cidade única cadastrada!")
                     loop1 = False
                 
                 elif type(resultadoCidade) == list:
                     # Pedir a confirmação do ID correto
-                    
-                    resultado = print(resultadoCidade)
+                    logs.logging.warning("Várias cidades estão cadastrada. \
+                        Precisa confirmar a  cidade correta!")
+                    logs.logging.info(resultadoCidade)
+                    print(resultadoCidade)
+                    resultado = int(input("Informa o ID da cidade correto para ser inserido:\n"))
                     idCidade = resultado
                     
+            # Esse é o Loope para o bairro
             loop2 = True 
             while loop2 == True:
+                
+                logs.logging.info("Procurar se o bairro está cadastrado!")
                 resultadoBairro = Procurar.bairro(bairro, idCidade)
                 
                 if resultadoBairro == False:
@@ -421,23 +484,39 @@ class Inserir:
                 elif type(resultadoBairro) == int:
                     idBairro = resultadoBairro
                     
-                    print("Bairro único cadastrada")
+                    logs.logging.info("Bairro único cadastrada")
                     loop2 = False
                 
                 elif type(resultadoBairro) == list:
                     # Pedir a confirmação do ID correto
-                    resultado = print(resultadoBairro)
+                    logs.logging.warning("Vários bairros estão cadastrados. \
+                        Precisa confirmar o  bairro correto!")
+                    logs.logging.info(resultadoBairro)
+                    print(resultadoBairro)
+                    resultado = int(input("Informa o ID do bairro correto para ser inserido:\n"))
                     idBairro = resultado
                 
             try: 
                 
+                
+                logs.logging.info(f"INSERT INTO endereço (idEndereço, CEP, Logradouro, Número, Complemento, bairros_id)\
+                VALUES ('{id_do_último_Endereço}','{CEP}', '{logradouro}', '{número}', '{complemento}',{idBairro})")
+                
                 mycursor.execute(f"INSERT INTO endereço (idEndereço, CEP, Logradouro, Número, Complemento, bairros_id)\
-                VALUES ({últimoIdEndereço() + 1},'{CEP}', '{logradouro}', '{número}', '{complemento}',{idBairro})") 
+                VALUES ('{id_do_último_Endereço}','{CEP}', '{logradouro}', '{número}', '{complemento}',{idBairro})") 
 
+                logs.logging.info(f"INSERT INTO Endereço_da_pessoa (idEndereço, idPessoa, Observação)\
+                VALUES ('{id_do_último_Endereço}','{id_pessoa}', NULL)") 
+            
+                mycursor.execute(f"INSERT INTO Endereço_da_pessoa (idEndereço, idPessoa, Observação)\
+                VALUES ('{id_do_último_Endereço}','{id_pessoa}', NULL)")
+                
+                
+                                
                 meuDB.commit()
                 resultado = True
             except mysql.connector.Error as error:
-                print("Falha na inserção dos dados!: {}".format(error))
+                logs.logging.error("Falha na inserção dos dados!: {}".format(error))
                 meuDB.rollback()
                 resultado = False
             return resultado    
@@ -458,7 +537,7 @@ class Inserir:
         resultadoCPF = Procurar.cpf(CPF)
         
         if resultadoCPF:
-            print(f"Erro: o CPF informado já encontra-se cadastrado. ID número: {Procurar._id_pf(CPF)}")
+            logs.logging.error(f"Erro: o CPF informado já encontra-se cadastrado. ID número: {Procurar._id_pf(CPF)}")
             resultado = False
     
         else:
@@ -492,17 +571,22 @@ class Inserir:
                 # Cliente = 0 é False e 1 é Verdadeiro.
                 # Funcionário = 0 é False e 1 é Verdadeiro.
                 
+                logs.logging.info(f"INSERT INTO pessoa (idPessoa, Tipo_Pessoa, Cliente, Funcionário)\
+                VALUES ({idPessoa}, 0, 0, 0)") 
+                
                 mycursor.execute(f"INSERT INTO `pessoa física` (idPessoa, CPF, {coluna_dados})\
                 VALUES ({idPessoa},{CPF_hash}, {dados})")
                 
-                # Ao inserir um novo cadastro, o usuário já vem "Ativado" por padrão.
-                # id = mycursor.fetchall()
+                logs.logging.info(f"INSERT INTO `pessoa física` (idPessoa, CPF, {coluna_dados})\
+                VALUES ({idPessoa},{CPF_hash}, {dados})")
+                
                 meuDB.commit()
                 resultado = True
             except mysql.connector.Error as error:
-                print("Falha na inserção dos dados!: {}".format(error))
+                logs.logging.error("Falha na inserção dos dados!: {}".format(error))
                 meuDB.rollback()
                 resultado = False
+        logs.logging.info(resultado)
         return resultado
 
 
@@ -550,9 +634,9 @@ class Inserir:
     
 #Inserir.endereço("01912841223", "76813848", "R. Escorpião", "11700", "s/c", "Ulisses Guimarães", "Porto Velho", "Rondônia")
 
-Inserir.dados_cliente_pf(CPF="01912841223", nome="Alefsander Ribeiro Nascimento", rg="1189307", orgão_RG="SESDEC/RO",
-                         data_emissão_RG="10/04/2010", data_nascimento="23/10/1994", sexo="Masculino", nacionalidade="Brasileiro",
-                         naturalidade="Porto Velho", nome_pai="João Nascimento de Souza", nome_mae="Edsandra Ribeiro de Souza")
+#Inserir.dados_cliente_pf(CPF="01912841223", nome="Alefsander Ribeiro Nascimento", rg="1189307", orgão_RG="SESDEC/RO",
+#                         data_emissão_RG="10/04/2010", data_nascimento="23/10/1994", sexo="Masculino", nacionalidade="Brasileiro",
+#                         naturalidade="Porto Velho", nome_pai="João Nascimento de Souza", nome_mae="Edsandra Ribeiro de Souza")
 
 
 

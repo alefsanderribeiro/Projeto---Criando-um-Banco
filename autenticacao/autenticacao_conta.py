@@ -1,7 +1,6 @@
 from pathlib import Path
 import sys
 sys.path.append(str(Path().absolute()))
-import openpyxl
 import contas.cliente as cliente
 from banco_de_dados import banco_dados as bd
 
@@ -14,17 +13,17 @@ class Verificacao:
         pass
         
     def cadastro(self, CPF):
-        resposta = bd.Procurar(CPF).cpf()
+        resposta = bd.Procurar.cpf(CPF)
         return resposta
     
 
     def _CONTA(self, CONTA):
         pass
-        return contas
+        return CONTA
         
     def _contas_no_CPF(self, CPF):
         pass
-        return contas
+        return CPF
 
     def contas(self, cpf_or_conta):
         

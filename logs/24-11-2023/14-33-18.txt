@@ -1,0 +1,31 @@
+2023-11-24 14:33:19,083 - INFO - Abrindo o programa e perguntando o que é para fazer.
+2023-11-24 14:33:20,612 - INFO - Opção escolhida: U
+2023-11-24 14:33:20,612 - INFO - Indo para a parte do cliente.
+2023-11-24 14:33:23,172 - INFO - CPF número: 01912841223
+2023-11-24 14:33:23,179 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-24 14:33:23,179 - INFO - Vamos cadastrar um novo usuário
+2023-11-24 14:33:23,179 - INFO - O CPF número 01912841223 NÃO está cadastrado.
+2023-11-24 14:33:24,302 - INFO - Antes de realizar o cadastro, vamos verificar se o CPF informado             já está cadastrado
+2023-11-24 14:33:24,303 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-24 14:33:24,304 - INFO - A verificação do CPF teve um resultado de: False
+2023-11-24 14:33:24,307 - INFO - O CPF número 01912841223 NÃO está cadastrado.                 Vamos começar o processo de cadastro de um novo usuário.
+2023-11-24 14:33:32,350 - INFO - {'nome': 'aksldjf', 'rg': 'asdlkfjas', 'orgão_RG': 'ajsdkf7asdklfj', 'data_emissão_RG': 'asdklfj', 'data_nascimento': 'adsflk', 'sexo': 'asdflkj', 'nacionalidade': 'asdfklj', 'naturalidade': 'asdlkfj', 'nome_pai': 'asdfklj', 'nome_mae': 'asdlkfj'}
+2023-11-24 14:33:32,351 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-24 14:33:32,351 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('aksldjf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,351 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdlkfjas'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,352 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('ajsdkf7asdklfj'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,352 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdklfj'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,352 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('adsflk'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,352 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdflkj'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,352 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdfklj'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,352 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdlkfj'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,352 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdfklj'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,352 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdlkfj'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,352 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('01912841223'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:33:32,363 - INFO - Função: últimoIdPessoa() - Resultado: 0
+2023-11-24 14:33:32,368 - ERROR - Falha na inserção dos dados!: 1142 (42000): INSERT command denied to user 'alefe-powerbi'@'localhost' for table 'pessoa'
+2023-11-24 14:33:32,368 - INFO - False
+2023-11-24 14:33:32,369 - INFO - O Resultado de inserção dos dados é: False
+2023-11-24 14:33:32,369 - INFO - Vamos cadastrar um novo usuário
+2023-11-24 14:33:32,369 - INFO - O CPF número 01912841223 NÃO está cadastrado.
+2023-11-24 14:33:36,934 - INFO - Opção escolhida: Q

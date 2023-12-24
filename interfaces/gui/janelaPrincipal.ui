@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>janelaPrincipal</class>
+ <widget class="QMainWindow" name="janelaPrincipal">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>700</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string extracomment="Sistema do Banco Digital">Álefe - Banco Digital</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
+  <property name="animated">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QMdiArea" name="mdiArea"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>700</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuCadastro">
+    <property name="title">
+     <string>Cadastro</string>
+    </property>
+    <widget class="QMenu" name="menuPessoa">
+     <property name="tabletTracking">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>Pessoa</string>
+     </property>
+     <addaction name="actionCliente"/>
+     <addaction name="actionFuncionario"/>
+     <addaction name="actionFornecedor"/>
+     <addaction name="actionTransportador"/>
+    </widget>
+    <widget class="QMenu" name="menuEndere_o">
+     <property name="title">
+      <string>Endereço</string>
+     </property>
+     <addaction name="actionPais"/>
+     <addaction name="actionEstado"/>
+     <addaction name="actionCidade"/>
+     <addaction name="actionBairro"/>
+     <addaction name="actionLogradouro"/>
+     <addaction name="actionCEP"/>
+    </widget>
+    <addaction name="menuPessoa"/>
+    <addaction name="menuEndere_o"/>
+    <addaction name="actionAg_ncias"/>
+    <addaction name="actionContas"/>
+   </widget>
+   <widget class="QMenu" name="menuFinanceiro">
+    <property name="title">
+     <string>Financeiro</string>
+    </property>
+    <widget class="QMenu" name="menuCaixa">
+     <property name="title">
+      <string>Caixa</string>
+     </property>
+     <addaction name="actionTurnos"/>
+    </widget>
+    <addaction name="menuCaixa"/>
+   </widget>
+   <widget class="QMenu" name="menuRelat_rios">
+    <property name="title">
+     <string>Relatórios</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuAjuda">
+    <property name="title">
+     <string>Ajuda</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuContabilidade">
+    <property name="title">
+     <string>Contabilidade</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuOpera_es">
+    <property name="title">
+     <string>Operações</string>
+    </property>
+   </widget>
+   <addaction name="menuCadastro"/>
+   <addaction name="menuOpera_es"/>
+   <addaction name="menuFinanceiro"/>
+   <addaction name="menuContabilidade"/>
+   <addaction name="menuRelat_rios"/>
+   <addaction name="menuAjuda"/>
+  </widget>
+  <action name="actionCliente">
+   <property name="text">
+    <string>Cliente</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WindowShortcut</enum>
+   </property>
+  </action>
+  <action name="actionFuncionario">
+   <property name="text">
+    <string>Funcionário</string>
+   </property>
+  </action>
+  <action name="actionFornecedor">
+   <property name="text">
+    <string>Fornecedor</string>
+   </property>
+  </action>
+  <action name="actionTransportador">
+   <property name="text">
+    <string>Transportador</string>
+   </property>
+  </action>
+  <action name="actionPais">
+   <property name="text">
+    <string>País</string>
+   </property>
+  </action>
+  <action name="actionEstado">
+   <property name="text">
+    <string>Estado</string>
+   </property>
+  </action>
+  <action name="actionCidade">
+   <property name="text">
+    <string>Cidade</string>
+   </property>
+  </action>
+  <action name="actionBairro">
+   <property name="text">
+    <string>Bairro</string>
+   </property>
+  </action>
+  <action name="actionLogradouro">
+   <property name="text">
+    <string>Logradouro</string>
+   </property>
+  </action>
+  <action name="actionCEP">
+   <property name="text">
+    <string>CEP</string>
+   </property>
+  </action>
+  <action name="actionContas">
+   <property name="text">
+    <string>Contas</string>
+   </property>
+  </action>
+  <action name="actionAg_ncias">
+   <property name="text">
+    <string>Agências</string>
+   </property>
+  </action>
+  <action name="actionTurnos">
+   <property name="text">
+    <string>Turnos</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

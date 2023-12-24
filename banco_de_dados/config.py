@@ -2,8 +2,8 @@
 
 # Banco de Dados
 endereço_host = "127.0.0.1"
-usuario = "root"
-senha = ".Alefe161277"
+usuario = "alefe-programa-python"
+senha = "159753456"
 meu_banco_dados = "banco-digital"
 
 

@@ -1,0 +1,52 @@
+2023-11-23 14:33:25,920 - INFO - Abrindo o programa e perguntando o que é para fazer.
+2023-11-23 14:33:27,199 - INFO - Opção escolhida: U
+2023-11-23 14:33:27,199 - INFO - Indo para a parte do cliente.
+2023-11-23 14:33:30,526 - INFO - CPF número: 45612344568
+2023-11-23 14:33:30,527 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-23 14:33:30,527 - INFO - Vamos cadastrar um novo usuário
+2023-11-23 14:33:30,527 - INFO - O CPF número 45612344568 NÃO está cadastrado.
+2023-11-23 14:33:31,468 - INFO - Antes de realizar o cadastro, vamos verificar se o CPF informado             já está cadastrado
+2023-11-23 14:33:31,469 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-23 14:33:31,469 - INFO - A verificação do CPF teve um resultado de: False
+2023-11-23 14:33:31,473 - INFO - O CPF número 45612344568 NÃO está cadastrado.                 Vamos começar o processo de cadastro de um novo usuário.
+2023-11-23 14:33:40,203 - INFO - {'nome': 'asdfasd', 'rg': 'fasdfasdf', 'orgão_RG': 'asdfasfd', 'data_emissão_RG': 'asfdsaf', 'data_nascimento': 'asdfas', 'sexo': 'fasdfa', 'nacionalidade': 'dsfasdfas', 'naturalidade': 'dfasdfasdf', 'nome_pai': 'asdfasdf', 'nome_mae': 'adfasdf'}
+2023-11-23 14:33:40,204 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-23 14:33:40,204 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdfasd'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,204 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('fasdfasdf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,204 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdfasfd'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,204 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asfdsaf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,204 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdfas'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,204 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('fasdfa'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,205 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('dsfasdfas'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,205 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('dfasdfasdf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,205 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('asdfasdf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,205 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('adfasdf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,205 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('45612344568'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-23 14:33:40,205 - INFO - Função: últimoIdPessoa() - Resultado: 5
+2023-11-23 14:33:40,211 - INFO - INSERT INTO pessoa (idPessoa, Tipo_Pessoa, Cliente, Funcionário)                VALUES (6, 0, 0, 0)
+2023-11-23 14:33:40,211 - INFO - INSERT INTO `pessoa física` (idPessoa, CPF, Nome, RG, Orgão_RG, Data_Emissão_RG, Data_Nascimento, Sexo, Nacionalidade, Naturalidade, Nome_Pai, Nome_Mãe)                VALUES (6,HEX(AES_ENCRYPT(('45612344568'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('asdfasd'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('fasdfasdf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('asdfasfd'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('asfdsaf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('asdfas'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('fasdfa'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('dsfasdfas'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('dfasdfasdf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('asdfasdf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('adfasdf'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))))
+2023-11-23 14:33:40,215 - INFO - True
+2023-11-23 14:33:40,215 - INFO - O Resultado de inserção dos dados é: True
+2023-11-23 14:33:40,215 - INFO - Cadastro feito com sucesso!
+2023-11-23 14:34:10,314 - INFO - {'CEP': '76800000', 'logradouro': 'Av. Sete de Setembro', 'número': '4596', 'complemento': 'com', 'bairro': 'KM1', 'cidade': 'Porto Velho', 'estado': 'Rondônia'}
+2023-11-23 14:34:10,319 - INFO - Função: Procurar.id_pessoa() - Resultado: 6
+2023-11-23 14:34:10,322 - INFO - Função: Procurar.id_estado_pelo_nome() - Resultado: 21
+2023-11-23 14:34:10,322 - INFO - Função: últimoIdEndereço() - Resultado: 1
+2023-11-23 14:34:10,322 - INFO - Procurar se a cidade está cadastrado!
+2023-11-23 14:34:10,323 - INFO - Função: Procurar.cidade() - Resultado: 1520
+2023-11-23 14:34:10,323 - INFO - Cidade única cadastrada!
+2023-11-23 14:34:10,323 - INFO - Procurar se o bairro está cadastrado!
+2023-11-23 14:34:10,324 - INFO - Função: Procurar.bairro() - Resultado: False
+2023-11-23 14:34:10,325 - INFO - Função: últimoIdBairro() - Resultado: 3
+2023-11-23 14:34:10,326 - INFO - Função: últimoIdBairro() - Resultado: 4
+2023-11-23 14:34:10,326 - INFO - INSERT INTO bairros (id, nome, cidade_id)            VALUES (5,'KM1', 1520)
+2023-11-23 14:34:10,330 - INFO - Função: Inserior._cidade() - Resultado: True
+2023-11-23 14:34:10,330 - INFO - Procurar se o bairro está cadastrado!
+2023-11-23 14:34:10,330 - INFO - Função: Procurar.bairro() - Resultado: 4
+2023-11-23 14:34:10,330 - INFO - Bairro único cadastrada
+2023-11-23 14:34:10,331 - INFO - INSERT INTO endereço (idEndereço, CEP, Logradouro, Número, Complemento, bairros_id)                VALUES ('2','76800000', 'Av. Sete de Setembro', '4596', 'com',4)
+2023-11-23 14:34:10,332 - INFO - INSERT INTO Endereço_da_pessoa (idEndereço, idPessoa, Observação)                VALUES ('2','6', NULL)
+2023-11-23 14:34:10,340 - INFO - Endereço inserido com sucesso!
+2023-11-23 14:34:15,215 - INFO - Vamos cadastrar um novo usuário
+2023-11-23 14:34:15,215 - INFO - O CPF número 45612344568 NÃO está cadastrado.
+2023-11-23 14:34:18,365 - INFO - Opção escolhida: Q

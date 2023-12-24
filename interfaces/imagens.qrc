@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/imanges">
+        <file>imagens/Alefe - Digital Bank.ico</file>
+        <file>imagens/Logo - Alefe - Digital Bank.png</file>
+        <file>imagens/Logo - Alefe - Digital Bank2 - Texto.png</file>
+        <file>imagens/logoAlefe.png</file>
+    </qresource>
+</RCC>

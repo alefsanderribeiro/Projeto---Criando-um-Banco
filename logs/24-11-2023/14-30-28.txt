@@ -1,0 +1,4 @@
+2023-11-24 14:30:30,479 - INFO - Abrindo o programa e perguntando o que é para fazer.
+2023-11-24 14:30:34,813 - INFO - Opção escolhida: U
+2023-11-24 14:30:34,814 - INFO - Indo para a parte do cliente.
+2023-11-24 14:30:38,020 - INFO - CPF número: 01912841223

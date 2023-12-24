@@ -8,15 +8,24 @@
 
 # Extrato: Deve listar todos os depósitos e saques realizados na conta. Mostrar o saldo final em "R$ XXX.XX".
 
+from menu import menu_cliente as m_cliente
+from menu import menu_conta as m_conta
+from interfaces.interface import interface as ui
 
-import menu.menu_cliente as m_cliente
-import menu.menu_conta as m_conta
 import logs
 import relatorios
 import transacoes
 
+from interfaces.rc_imagens import *
+
+
+if __name__ == "__main__":
+    ui()
 
 menu_principal = """
+
+####  Bem vindo ao seu Banco Digital  ####
+
 Escolhe uma opção para prosseguir:
 
 
@@ -24,13 +33,18 @@ U = "Usuário"
 C = "Conta Bancária"
 Q = "Sair"
 
+
+
+####  -------------------------------  ####
 """
 
-
+logs.logging.info("Abrindo o programa e perguntando o que é para fazer.")
 while True:
-    opcao = str(input(menu_principal)).upper()
     
+    opcao = str(input(menu_principal)).upper()
+    logs.logging.info(f"Opção escolhida: {opcao}")
     if opcao == "U":
+        logs.logging.info("Indo para a parte do cliente.")
         m_cliente.menu_cliente()
 
     elif opcao == "C":
@@ -40,5 +54,7 @@ while True:
         break
     else:
         print("Operação Inválida, por favor selecione novamente a operação desejada.")
+        
+        
 
 

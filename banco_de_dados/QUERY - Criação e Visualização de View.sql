@@ -1,0 +1,18 @@
+CREATE VIEW cliente_pf_view AS SELECT `idPessoa Física`, idPessoa, 
+CAST(AES_DECRYPT(UNHEX(CPF), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS CPF, 
+CAST(AES_DECRYPT(UNHEX(Nome), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS Nome, 
+CAST(AES_DECRYPT(UNHEX(RG), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS RG,
+CAST(AES_DECRYPT(UNHEX(Orgão_RG), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS Orgão_RG, 
+CAST(AES_DECRYPT(UNHEX(Data_Emissão_RG), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS Data_Emissão_RG, 
+CAST(AES_DECRYPT(UNHEX(Data_Nascimento), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS Data_Nascimento, 
+CAST(AES_DECRYPT(UNHEX(Sexo), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS Sexo, 
+CAST(AES_DECRYPT(UNHEX(Nacionalidade), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS Nacionalidade, 
+CAST(AES_DECRYPT(UNHEX(Naturalidade), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS Naturalidade, 
+CAST(AES_DECRYPT(UNHEX(Nome_Pai), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS Nome_Pai, 
+CAST(AES_DECRYPT(UNHEX(Nome_Mãe), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w=')) AS CHAR(255)) AS Nome_Mãe 
+
+FROM `pessoa física`;
+
+SELECT * FROM cliente_pf_view;
+
+DROP VIEW cliente_pf_view;

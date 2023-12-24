@@ -1,0 +1,2 @@
+2023-12-18 00:37:52,525 - INFO - Função: Procurar.senha_do_funcionario() - Resultado: False
+2023-12-18 00:37:54,319 - INFO - Função: Procurar.senha_do_funcionario() - Resultado: False

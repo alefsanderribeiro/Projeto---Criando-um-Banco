@@ -1,0 +1,8 @@
+2023-11-24 14:31:02,798 - INFO - Abrindo o programa e perguntando o que é para fazer.
+2023-11-24 14:31:04,298 - INFO - Opção escolhida: U
+2023-11-24 14:31:04,298 - INFO - Indo para a parte do cliente.
+2023-11-24 14:31:07,004 - INFO - CPF número: 01912841223
+2023-11-24 14:31:07,009 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-24 14:31:07,010 - INFO - Vamos cadastrar um novo usuário
+2023-11-24 14:31:07,010 - INFO - O CPF número 01912841223 NÃO está cadastrado.
+2023-11-24 14:31:11,782 - INFO - Opção escolhida: Q

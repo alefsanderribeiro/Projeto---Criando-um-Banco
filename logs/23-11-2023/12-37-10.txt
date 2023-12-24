@@ -1,0 +1,12 @@
+2023-11-23 12:37:11,368 - INFO - Abrindo o programa e perguntando o que é para fazer.
+2023-11-23 12:37:12,765 - INFO - Opção escolhida: U
+2023-11-23 12:37:12,767 - INFO - Indo para a parte do cliente.
+2023-11-23 12:37:18,168 - INFO - CPF número: 01912841222
+2023-11-23 12:37:18,174 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-23 12:37:18,174 - INFO - Vamos cadastrar um novo usuário
+2023-11-23 12:37:18,174 - INFO - O CPF número 01912841222 NÃO está cadastrado.
+2023-11-23 12:37:19,454 - INFO - Antes de realizar o cadastro, vamos verificar se o CPF informado             já está cadastrado
+2023-11-23 12:37:19,456 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-23 12:37:19,456 - INFO - A verificação do CPF teve um resultado de: False
+2023-11-23 12:37:19,456 - INFO - O CPF número 01912841222 NÃO está cadastrado.                 Vamos começar o processo de cadastro de um novo usuário.
+2023-11-23 12:37:49,564 - INFO - {'nome': 'Alefsander Ribeiro Nascimento', 'rg': '1189307', 'orgão_RG': 'SSP/RO', 'data_emissão_RG': '10/10/2010', 'data_nascimento': '23/10/1994', 'sexo': 'm', 'nacionalidade': 'Brasil', 'nome_pai': 'João Nascimento de Souza', 'nome_mae': 'Edsandra Ribeiro de Souza'}

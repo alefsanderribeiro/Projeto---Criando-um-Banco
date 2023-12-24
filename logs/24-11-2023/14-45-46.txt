@@ -1,0 +1,59 @@
+2023-11-24 14:45:47,186 - INFO - Abrindo o programa e perguntando o que é para fazer.
+2023-11-24 14:45:47,188 - INFO - Opção escolhida: S/PROJETO---CRIANDO-UM-BANCO/MAIN.PY
+2023-11-24 14:45:49,243 - INFO - Opção escolhida: U
+2023-11-24 14:45:49,243 - INFO - Indo para a parte do cliente.
+2023-11-24 14:45:52,675 - INFO - CPF número: 01912841223
+2023-11-24 14:45:52,679 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-24 14:45:52,679 - INFO - Vamos cadastrar um novo usuário
+2023-11-24 14:45:52,679 - INFO - O CPF número 01912841223 NÃO está cadastrado.
+2023-11-24 14:45:53,797 - INFO - Antes de realizar o cadastro, vamos verificar se o CPF informado             já está cadastrado
+2023-11-24 14:45:53,798 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-24 14:45:53,798 - INFO - A verificação do CPF teve um resultado de: False
+2023-11-24 14:45:53,799 - INFO - O CPF número 01912841223 NÃO está cadastrado.                 Vamos começar o processo de cadastro de um novo usuário.
+2023-11-24 14:46:35,341 - INFO - {'nome': 'Alefsander Ribeiro Nascimento', 'rg': '1189307', 'orgão_RG': 'SSP/RO', 'data_emissão_RG': '10/04/2010', 'data_nascimento': '23/10/1994', 'sexo': 'M', 'nacionalidade': 'Brasil', 'naturalidade': 'Porto Velho/RO', 'nome_pai': 'João Nascimento de Souza', 'nome_mae': 'Edsandra Ribeiro de Souza'}
+2023-11-24 14:46:35,347 - INFO - Função: Procurar.cpf() - Resultado: False
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('Alefsander Ribeiro Nascimento'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('1189307'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('SSP/RO'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('10/04/2010'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('23/10/1994'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('M'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('Brasil'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('Porto Velho/RO'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('João Nascimento de Souza'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('Edsandra Ribeiro de Souza'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,347 - INFO - Função: _gerar() - Resultado: HEX(AES_ENCRYPT(('01912841223'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), 
+2023-11-24 14:46:35,349 - INFO - Função: últimoIdPessoa() - Resultado: 0
+2023-11-24 14:46:35,354 - INFO - INSERT INTO pessoa (idPessoa, Tipo_Pessoa, Cliente, Funcionário)                VALUES (1, 0, 0, 0)
+2023-11-24 14:46:35,359 - INFO - INSERT INTO `pessoa física` (idPessoa, CPF, Nome, RG, Orgão_RG, Data_Emissão_RG, Data_Nascimento, Sexo, Nacionalidade, Naturalidade, Nome_Pai, Nome_Mãe)                VALUES (1,HEX(AES_ENCRYPT(('01912841223'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('Alefsander Ribeiro Nascimento'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('1189307'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('SSP/RO'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('10/04/2010'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('23/10/1994'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('M'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('Brasil'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('Porto Velho/RO'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('João Nascimento de Souza'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))), HEX(AES_ENCRYPT(('Edsandra Ribeiro de Souza'), ('1Ac1jH5sf0Z50kgK-TA9JsR02nt8AgYdUX3JzlodI9w='))))
+2023-11-24 14:46:35,362 - INFO - True
+2023-11-24 14:46:35,362 - INFO - O Resultado de inserção dos dados é: True
+2023-11-24 14:46:35,362 - INFO - Cadastro feito com sucesso!
+2023-11-24 14:47:09,959 - INFO - {'CEP': '76828899', 'logradouro': 'R. Maué', 'número': '4440', 'complemento': 'Ao lado da Oficina Mecânica', 'bairro': 'Socialista', 'cidade': 'Porto Velho', 'estado': 'Rondônia'}
+2023-11-24 14:47:09,961 - INFO - Função: Procurar.id_pessoa() - Resultado: 1
+2023-11-24 14:47:09,965 - INFO - Função: Procurar.id_estado_pelo_nome() - Resultado: 21
+2023-11-24 14:47:09,966 - INFO - Função: últimoIdEndereço() - Resultado: 0
+2023-11-24 14:47:09,967 - INFO - Procurar se a cidade está cadastrado!
+2023-11-24 14:47:09,968 - INFO - Função: Procurar.cidade() - Resultado: 1520
+2023-11-24 14:47:09,969 - INFO - Cidade única cadastrada!
+2023-11-24 14:47:09,969 - INFO - Procurar se o bairro está cadastrado!
+2023-11-24 14:47:09,970 - INFO - Função: Procurar.bairro() - Resultado: False
+2023-11-24 14:47:09,971 - INFO - Função: últimoIdBairro() - Resultado: 0
+2023-11-24 14:47:09,972 - INFO - Função: últimoIdBairro() - Resultado: 1
+2023-11-24 14:47:09,972 - INFO - INSERT INTO bairros (id, nome, cidade_id)            VALUES (2,'Socialista', 1520)
+2023-11-24 14:47:09,975 - INFO - Função: Inserior._cidade() - Resultado: True
+2023-11-24 14:47:09,975 - INFO - Procurar se o bairro está cadastrado!
+2023-11-24 14:47:09,976 - INFO - Função: Procurar.bairro() - Resultado: 1
+2023-11-24 14:47:09,976 - INFO - Bairro único cadastrada
+2023-11-24 14:47:09,976 - INFO - INSERT INTO endereço (idEndereço, CEP, Logradouro, Número, Complemento, bairros_id)                VALUES ('1','76828899', 'R. Maué', '4440', 'Ao lado da Oficina Mecânica',1)
+2023-11-24 14:47:09,978 - INFO - INSERT INTO Endereço_da_pessoa (idEndereço, idPessoa, Observação)                VALUES ('1','1', NULL)
+2023-11-24 14:47:09,982 - INFO - Endereço inserido com sucesso!
+2023-11-24 14:47:13,783 - INFO - Vamos cadastrar um novo usuário
+2023-11-24 14:47:13,783 - INFO - O CPF número 01912841223 NÃO está cadastrado.
+2023-11-24 14:47:19,790 - INFO - Opção escolhida: U
+2023-11-24 14:47:19,790 - INFO - Indo para a parte do cliente.
+2023-11-24 14:47:22,810 - INFO - CPF número: 01912841223
+2023-11-24 14:47:22,811 - INFO - Função: Procurar.cpf() - Resultado: True
+2023-11-24 14:47:22,811 - INFO - O CPF número 01912841223 está cadastrado.
+2023-11-24 14:47:28,966 - INFO - A opção escolhida foi: Q
+2023-11-24 14:47:30,452 - INFO - Opção escolhida: Q

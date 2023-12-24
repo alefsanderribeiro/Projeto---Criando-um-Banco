@@ -1,0 +1,2 @@
+2023-12-18 15:57:31,687 - INFO - Abrindo o programa e perguntando o que é para fazer.
+2023-12-18 15:57:43,157 - INFO - Opção escolhida: Q

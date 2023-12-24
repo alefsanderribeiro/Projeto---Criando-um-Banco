@@ -3,8 +3,7 @@ import sys
 sys.path.append(str(Path().absolute()))
 import openpyxl
 from autenticacao.criptografia import Crypt
-from banco_de_dados.banco_dados import arquivo_clientes, arquivo_contas
-import banco_de_dados.banco_dados as bd
+import banco_de_dados as bd
 import argon2
 import re
 
@@ -39,7 +38,7 @@ class Senha:
         
         senha_atual = str(input("Digita a sua senha..."))
         self.numero_conta = int(self.numero_conta)
-        f = openpyxl.load_workbook(arquivo_contas)
+        f = openpyxl.load_workbook("")
         aba = f.active
         for i in range(1, len(aba['A']) + 1):
             if self.numero_conta == aba[f'A{i}'].value:

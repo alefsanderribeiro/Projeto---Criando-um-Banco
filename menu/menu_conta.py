@@ -6,8 +6,6 @@ import contas.cliente as fu
 import autenticacao.autenticacao_conta as aut_conta
 import autenticacao.autenticacao_senha as aut_senha
 
-
-
 menu_opcoes_conta = """
 Escolhe uma opção para prosseguir:
 

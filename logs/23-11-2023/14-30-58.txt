@@ -1,0 +1,6 @@
+2023-11-23 14:30:58,305 - INFO - Função: últimoIdEndereço() - Resultado: 1
+2023-11-23 14:30:58,306 - INFO - Função: últimoIdEndereço() - Resultado: 1
+2023-11-23 14:30:58,307 - INFO - Função: últimoIdEndereço() - Resultado: 1
+2023-11-23 14:30:58,317 - INFO - Função: últimoIdEndereço() - Resultado: 1
+2023-11-23 14:30:58,319 - INFO - Função: últimoIdEndereço() - Resultado: 1
+2023-11-23 14:30:58,320 - INFO - Função: últimoIdEndereço() - Resultado: 1
