@@ -23,8 +23,8 @@ from banco_de_dados import banco_dados as bd
 
 
 class login(QWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self):
+        super().__init__()
         self.ui = Ui_login()
         self.ui.setupUi(self)
         
@@ -33,9 +33,6 @@ class login(QWidget):
         
         
     def entrar(self):
-        
-        # Preciso criar no banco de dados sobre o Login no sistema.
-        
 
         user_botao = self.ui.LineEditLogin.text()
         pass_botao = self.ui.LineEditSenha.text()

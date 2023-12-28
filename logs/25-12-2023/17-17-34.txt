@@ -1,0 +1,1 @@
+2023-12-25 17:17:44,058 - INFO - Função: Procurar.senha_do_funcionario() - Resultado: True

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>500</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -16,8 +16,16 @@
     <height>500</height>
    </size>
   </property>
+  <property name="tabletTracking">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
-   <string extracomment="Sistema do Banco Digital">Álefe - Banco Digital</string>
+   <string extracomment="Sistema do Banco Digital">Banco Digital Álefe</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/imanges/imagens/logoAlefe.png</normaloff>
+    <activeon>:/imagens/imagens/Logo - Icon - Alefe - Digital Bank.png</activeon>:/imanges/imagens/logoAlefe.png</iconset>
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
@@ -26,9 +34,19 @@
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QMdiArea" name="mdiArea"/>
+     <widget class="QMdiArea" name="mdiArea">
+      <property name="background">
+       <brush brushstyle="NoBrush">
+        <color alpha="255">
+         <red>160</red>
+         <green>160</green>
+         <blue>160</blue>
+        </color>
+       </brush>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -37,7 +55,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>700</width>
+     <width>800</width>
      <height>25</height>
     </rect>
    </property>

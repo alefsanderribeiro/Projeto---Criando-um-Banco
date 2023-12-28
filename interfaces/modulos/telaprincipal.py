@@ -15,12 +15,14 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMenu, QMenuBar,
     QSizePolicy, QStatusBar, QWidget, QMessageBox, QMdiSubWindow)
 
+from interfaces.modulos.cadastro_cliente import cadastro_cliente
+from interfaces.modulos.cadastro_funcionario import cadastro_funcionario
+from interfaces.modulos.cadastro_fornecedor import cadastro_fornecedor
+from interfaces.modulos.cadastro_transportador import cadastro_transportador
+
+
 
 from interfaces.template.ui_janelaPrincipal import Ui_janelaPrincipal
-from interfaces.template.ui_cadastro_funcionario import Ui_cadastro_funcionario
-
-from interfaces.template.ui_cadastro_cliente import Ui_cadastro_cliente
-from interfaces.template.ui_cadastro_fornecedor import Ui_cadastro_fornecedor
 from interfaces.template.ui_cadastro_transportador import Ui_cadastro_transportador
 
 
@@ -30,49 +32,32 @@ class janelaPrincipal(QMainWindow):
         self.ui = Ui_janelaPrincipal()
         self.ui.setupUi(self)
 
+        
         self.ui.actionCliente.triggered.connect(self.cadastro_cliente)
         self.ui.actionFuncionario.triggered.connect(self.cadastro_funcionario)
         self.ui.actionFornecedor.triggered.connect(self.cadastro_fornecedor)
         self.ui.actionTransportador.triggered.connect(self.cadastro_transportador)
+        
     
+    def _criar_subwindow(self, título_subwindow:str, modulo):
+        self.subwindow = QMdiSubWindow()
+        self.subwindow.setWindowTitle(título_subwindow)
+        self.subwindow.setWidget(modulo)
+        
+        self.ui.mdiArea.addSubWindow(self.subwindow)
+        self.subwindow.show()
+        
     def cadastro_cliente(self):
-        subwindow = QMdiSubWindow()
-        subwindow.setWindowTitle("Cadastro de Cliente")
-        ui = Ui_cadastro_cliente()
-        subwindow.setWidget(ui.setupUi(self))
-        
-        self.ui.mdiArea.addSubWindow(subwindow)
-        subwindow.show()
-        
+        self._criar_subwindow("Cadastro do Cliente", cadastro_cliente())
+
     def cadastro_funcionario(self):
-        
-        subwindow = QMdiSubWindow()
-        subwindow.setWindowTitle("Cadastro de Funcionario")
-        cf = Ui_cadastro_funcionario()
-        subwindow.setWidget(cf)
-        
-        self.ui.mdiArea.addSubWindow(subwindow)
-        subwindow.show()
-        
-        
+        self._criar_subwindow("Cadastro de Funcionario", cadastro_funcionario())
+
     def cadastro_fornecedor(self):
-        
-        subwindow = QMdiSubWindow()
-        subwindow.setWindowTitle("Cadastro de Fornecedor")
-        subwindow.setWidget(Ui_cadastro_fornecedor())
-        
-        self.ui.mdiArea.addSubWindow(subwindow)
-        subwindow.show()
-         
+        self._criar_subwindow("Cadastro de Fornecedor", cadastro_fornecedor())
+
     def cadastro_transportador(self):
-        
-        subwindow = QMdiSubWindow()
-        subwindow.setWindowTitle("Cadastro do Transportador")
-        cf = Ui_cadastro_transportador()
-        subwindow.setWidget(cf)
-        
-        self.ui.mdiArea.addSubWindow(subwindow)
-        subwindow.show()
-        
+        self._criar_subwindow("Cadastro do Transportador", cadastro_transportador())
+
         
 

@@ -16,15 +16,20 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QMainWindow, QMdiArea,
-    QMenu, QMenuBar, QSizePolicy, QWidget)
+from PySide6.QtWidgets import (QApplication, QMainWindow, QMdiArea, QMenu,
+    QMenuBar, QSizePolicy, QVBoxLayout, QWidget)
 
 class Ui_janelaPrincipal(object):
     def setupUi(self, janelaPrincipal):
         if not janelaPrincipal.objectName():
             janelaPrincipal.setObjectName(u"janelaPrincipal")
-        janelaPrincipal.resize(700, 500)
+        janelaPrincipal.resize(800, 600)
         janelaPrincipal.setMinimumSize(QSize(700, 500))
+        janelaPrincipal.setTabletTracking(False)
+        icon = QIcon()
+        icon.addFile(u":/imanges/imagens/logoAlefe.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/imagens/imagens/Logo - Icon - Alefe - Digital Bank.png", QSize(), QIcon.Active, QIcon.On)
+        janelaPrincipal.setWindowIcon(icon)
         janelaPrincipal.setLayoutDirection(Qt.LeftToRight)
         janelaPrincipal.setAnimated(True)
         self.actionCliente = QAction(janelaPrincipal)
@@ -56,17 +61,20 @@ class Ui_janelaPrincipal(object):
         self.actionTurnos.setObjectName(u"actionTurnos")
         self.centralwidget = QWidget(janelaPrincipal)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.horizontalLayout = QHBoxLayout(self.centralwidget)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.verticalLayout = QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
         self.mdiArea = QMdiArea(self.centralwidget)
         self.mdiArea.setObjectName(u"mdiArea")
+        brush = QBrush(QColor(160, 160, 160, 255))
+        brush.setStyle(Qt.NoBrush)
+        self.mdiArea.setBackground(brush)
 
-        self.horizontalLayout.addWidget(self.mdiArea)
+        self.verticalLayout.addWidget(self.mdiArea)
 
         janelaPrincipal.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(janelaPrincipal)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 700, 25))
+        self.menubar.setGeometry(QRect(0, 0, 800, 25))
         self.menuCadastro = QMenu(self.menubar)
         self.menuCadastro.setObjectName(u"menuCadastro")
         self.menuPessoa = QMenu(self.menuCadastro)
@@ -117,7 +125,7 @@ class Ui_janelaPrincipal(object):
     # setupUi
 
     def retranslateUi(self, janelaPrincipal):
-        janelaPrincipal.setWindowTitle(QCoreApplication.translate("janelaPrincipal", u"\u00c1lefe - Banco Digital", None))
+        janelaPrincipal.setWindowTitle(QCoreApplication.translate("janelaPrincipal", u"Banco Digital \u00c1lefe", None))
         self.actionCliente.setText(QCoreApplication.translate("janelaPrincipal", u"Cliente", None))
         self.actionFuncionario.setText(QCoreApplication.translate("janelaPrincipal", u"Funcion\u00e1rio", None))
         self.actionFornecedor.setText(QCoreApplication.translate("janelaPrincipal", u"Fornecedor", None))

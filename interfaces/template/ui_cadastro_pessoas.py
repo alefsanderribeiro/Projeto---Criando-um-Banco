@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QLabel, QMainWindow, QSizePolicy,
     QWidget)
 
-class Ui_cadastro_funcionario(object):
+class Ui_cadastro_funcionario(QWidget):
     def setupUi(self, cadastro_funcionario):
         if not cadastro_funcionario.objectName():
             cadastro_funcionario.setObjectName(u"cadastro_funcionario")
